@@ -1,0 +1,21 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+{% block bloqueQueCambia %}
+<br>
+<H1>LOGIN</H1>
+
+<form action="{% url 'Login' %}" method="POST">{% csrf_token %}
+
+    {{formlog.as_p}}
+
+    <input type="submit" value="Iniciar Sesion">
+
+</form>
+<br>
+<h8>
+    Si no tienes cuenta, puedes registrarte <A HREF="{% url 'Registrar' %}"> AQUÍ</A>
+</h8>
+
+{% endblock bloqueQueCambia %}

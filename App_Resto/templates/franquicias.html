@@ -1,0 +1,28 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+<h1>FRANQUICIAS</h1>
+<h4>LANZAMOS NUESTRO PROGRAMA DE FRANQUICIAS PARA EL INTERIOR & EL EXTERIOR.</h4>
+
+    <form action="{% url 'Franquicias' %}" method="POST">{% csrf_token %}
+        <br>
+        <table><b>Nombre:</b>  &nbsp;&nbsp;{{Formulario.nombre}} </table> 
+        <br>
+        <table><b>Apellido: </b> &nbsp;&nbsp;&nbsp; {{Formulario.apellido}} </table>
+        <br>
+        <table ><b>Email:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{Formulario.email}} </table>
+        <br>
+        <table><b>Telefono:</b>&nbsp;&nbsp; {{Formulario.telefono}} </table>
+        <br>
+        <table><b>Zona:</b>&nbsp;&nbsp; {{Formulario.zona}} </table>
+        <br>
+        <input type="submit" value="Enviar">
+        </font>
+    </form>
+    <br>
+
+    
+{% endblock bloqueQueCambia %}

@@ -1,0 +1,75 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+
+<h1>CONSULTAS</h1>
+<h4>Si tenes alguna pregunta, no dudes en contactarnos. Te responderemos en los proximos dias.</h4>
+
+    <form action="{% url 'Consultas' %}" method="POST">{% csrf_token %}
+        <br>
+
+    <body style ="margin-left: 1em; margin-right: 1em">
+    <form action="{% url 'Consultas' %}" method="POST">{% csrf_token %}
+
+        <font face="garamond">
+        <table><b>Nombre:</b>  &nbsp;&nbsp;{{miFormulario.nombre}} </table> 
+        <br>
+        <table><b>Asunto: </b> &nbsp;&nbsp;&nbsp; {{miFormulario.asunto}} </table>
+        <br>
+        <table ><b>Email:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{miFormulario.email}} </table>
+        <br>
+        <table><b>Mensaje:</b>&nbsp;&nbsp; {{miFormulario.mensaje}} </table>
+        <br>
+
+        <input type="submit" value="Enviar">
+        </font>
+    </form>
+    <br>
+
+    <h4>
+        PREGUNTAS FRECUENTES
+    </h4>
+    <h7><b>
+        ¿Cual es nuestro horario?
+    </b></h7>
+    <br>
+    <h8>
+        Lunes a Viernes desde las 20hs
+    </h8>
+    <br>
+    <br>
+    <h7><b>
+        ¿Se puede reservar?
+    </b></h7>
+    <br>
+    <h8>
+        Si! Máximo para 6 personas y se hace a traves del siguiente <A HREF="https://anafe.meitre.com/"> link de reservas </A>.
+    </h8>
+    <br>
+    <br>
+    <h7><b>
+        ¿Tienen opciones vegetarianas/veganas?
+    </b></h7>
+    <br>
+    <h8>
+        Si. Podes ver nuestros platos vegetarianos/veganos en la seccion <A HREF="{% url 'Menu' %}"> MENU</A>. Tienen una V al lado.
+    </h8>
+    <br>
+    <br>
+    <h7><b>
+        ¿Tienen Instagram?
+    </b></h7>
+    <br>
+    <h8>
+        Si,  <A HREF="https://www.instagram.com/anafe.ba/"> @anafe.ba </A>
+    </h8>
+    <br>
+
+        
+    
+
+    </body>
+{% endblock bloqueQueCambia %}
