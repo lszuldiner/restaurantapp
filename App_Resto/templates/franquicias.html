@@ -4,20 +4,29 @@
 
 
 {% block bloqueQueCambia %}
+<head>
+    <style>
+        footer{
+        text-align: center;
+        position: absolute;
+    }
+    </style>
+</head>
 <h1>FRANQUICIAS</h1>
 <h4>LANZAMOS NUESTRO PROGRAMA DE FRANQUICIAS PARA EL INTERIOR & EL EXTERIOR.</h4>
 
+    <font face="garamond">
     <form action="{% url 'Franquicias' %}" method="POST">{% csrf_token %}
         <br>
-        <table><b>Nombre:</b>  &nbsp;&nbsp;{{Formulario.nombre}} </table> 
+        <table><b>Nombre:</b>  &nbsp;&nbsp;&nbsp;{{Formulario.nombre}} </table> 
         <br>
-        <table><b>Apellido: </b> &nbsp;&nbsp;&nbsp; {{Formulario.apellido}} </table>
+        <table><b>Apellido: </b> &nbsp;&nbsp; {{Formulario.apellido}} </table>
         <br>
-        <table ><b>Email:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{Formulario.email}} </table>
+        <table ><b>Email:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{Formulario.email}} </table>
         <br>
         <table><b>Telefono:</b>&nbsp;&nbsp; {{Formulario.telefono}} </table>
         <br>
-        <table><b>Zona:</b>&nbsp;&nbsp; {{Formulario.zona}} </table>
+        <table><b>Zona:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{Formulario.zona}} </table>
         <br>
         <input type="submit" value="Enviar">
         </font>
