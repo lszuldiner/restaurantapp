@@ -23,7 +23,7 @@
         <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
         <!-- Bootstrap icons-->
         <link href="{% static 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css' %}" rel="stylesheet" type="text/css" />
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />  
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     </head>
 
@@ -43,7 +43,7 @@
                 <a class="navbar-brand" href="{% url 'Franquicias' %}">FRANQUICIAS
                 </a>
                 </a>
-                <a class="navbar-brand" href="{% url 'Platos' %}">PEDIDOS ONLINE
+                <a class="navbar-brand" href="{% url 'Reservas' %}">RESERVAS
                 </a>
 
 
@@ -57,44 +57,18 @@
         </nav>
     </body>
 
-    <br>
+    
     {% block bloqueQueCambia %}
             
     {% endblock bloqueQueCambia %}
 
   <!-- Site footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12 col-md-6">
-          <h6>ANAFE</h6>
-          <p class="footer1">Ganadores del premio <i> 50 BEST ONE TO WATCH 2021 LATAM </i></p>
-          <p class="footer2"> Nos inspiran nuestra herencia, nuestros viajes, nuestro país y todos los países del mundo.
-            Tanto nosotros como todo nuestro equipo, los esperamos cuando quieran para compartir una comida en nuestras mesas. Comamos rico y tomemos vinito como filosofía ante la vida!</p>
-        </div>
-
-        <div class="col-xs-6 col-md-3">
-          <h6>Redes Sociales</h6>
-          <ul class="footer-links">
-           <p><a href="https://www.instagram.com/anafe.ba/">Instagram</a></p> 
-           <p><a href="https://www.instagram.com/anafe.ba/">Facebook</a></p>
-           <p><a href="https://www.instagram.com/anafe.ba/">Youtube</a></p>
-           <p><a href="https://www.instagram.com/anafe.ba/">TikTok</a></p>
-           <p><a href="https://www.instagram.com/anafe.ba/">Twitter</a></p>
-          </ul>
-        </div>
-      </div>
-      <hr>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-sm-6 col-xs-12">
-          <p class="copyright-text">Copyright &copy; 2022 Todos los derechos reservados por  
-       <a href="#">ANAFE</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-</footer>
+  <div class="container-footer">
+    <footer>
+      <center>
+        <H1>SEGUINOS EN </H1><a href="https://www.instagram.com/anafe.ba/"><img src="{% static 'assets/img/ig.png' %}" alt="" width="35" height="35" /></a>
+      </center>
+    </footer>
+  </div>
 
 </html>

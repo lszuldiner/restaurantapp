@@ -3,27 +3,20 @@
 {% load static %}
 
 {% block bloqueQueCambia %}
-<head>
-    <style>
-        footer{
-        text-align: center;
-        position: absolute;
-    }
-    </style>
-</head>
 <br>
-<H1>LOGIN</H1>
+<body>
+    <H1>LOGIN</H1>
 
-<form action="{% url 'Login' %}" method="POST">{% csrf_token %}
+        <form action="{% url 'Login' %}" method="POST">{% csrf_token %}
 
-    {{formlog.as_p}}
+            {{miFormulario.as_p}}
 
-    <input type="submit" value="Iniciar Sesion">
+            <input type="submit" value="Iniciar Sesion">
 
-</form>
-<br>
-<h8>
-    Si no tienes cuenta, puedes registrarte <A HREF="{% url 'Registro' %}"> AQUÍ</A>
-</h8>
-
+        </form>
+    <br>
+    <h8>
+        Si no tienes cuenta, puedes registrarte <A HREF="{% url 'Registrar' %}"> AQUÍ</A>
+    </h8>
+</body>
 {% endblock bloqueQueCambia %}

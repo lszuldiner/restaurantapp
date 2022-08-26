@@ -33,7 +33,9 @@
 
 <body style ="margin-left: 1em; margin-right: 1em;"> 
 <br>  
-<h5><font face="garamond">Busca algun plato especifico de nuestro menú</h5>
+<center>
+  <h5><font face="garamond">Busca algun plato especifico de nuestro menú</h5>
+</center>
 
   <form action= "{% url 'Buscar' %}"  method="GET">{% csrf_token %}
       <input type="text" name="prd">

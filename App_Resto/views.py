@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import json
 
-from App_Resto.forms import ContactoFormulario, FranquiciaForm, SuscripcionForm
-from App_Resto.models import Category, Consulta, Franquicia, Productos, Suscripcion
+from App_Resto.forms import ContactoFormulario, FranquiciaForm, ReservasForm
+from App_Resto.models import Category, Consulta, Franquicia, Productos, Reservas
 
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
@@ -78,32 +78,6 @@ def buscar(request):
     return render(request, "resultadoBusquedaNada.html")
 
 
-def inicio(request):
-
-    print('method:', request.method)
-    print('post:', request.POST)
-
-    if request.method == 'POST':
-
-        miForm = SuscripcionForm(request.POST)
-
-        if miForm.is_valid():
-
-            data = miForm.cleaned_data
-
-            suscripcion = Suscripcion(email=data['email'])
-
-            suscripcion.save()
-
-            return render(request, 'suscripto.html')
-
-    else:
-
-        miForm = SuscripcionForm()
-
-    return render(request, "inicio.html", {"miForm": miForm})
-
-
 def franquicias(request):
 
     print('method:', request.method)
@@ -137,11 +111,11 @@ def loginView(request):
 
     if request.method == 'POST':
 
-        formlog = AuthenticationForm(request, data=request.POST)
+        miFormulario = AuthenticationForm(request, data=request.POST)
 
-        if formlog.is_valid():
+        if miFormulario.is_valid():
 
-            data = formlog.cleaned_data
+            data = miFormulario.cleaned_data
 
             usuario = data["username"]
             psw = data["password"]
@@ -162,9 +136,9 @@ def loginView(request):
 
     else:
 
-        formlog = AuthenticationForm()
+        miFormulario = AuthenticationForm()
 
-    return render(request, "login.html", {"formlog": formlog})
+    return render(request, "login.html", {"miFormulario": miFormulario})
 
 
 def register(request):
@@ -189,19 +163,37 @@ def register(request):
 
 
 def platos(request):
-    if request.user.is_authenticated:
-        return render(request, "platos.html", context = {"categories":Category.objects.all})
+
+    categories = Category.objects.all()
+
+    contexto = {"categories": categories}
+
+    return render(request, "platos.html", contexto)
+
+
+
+def reservas(request):
+
+    print('method:', request.method)
+    print('post:', request.POST)
+
+    if request.method == 'POST':
+
+        miFormulario = ReservasForm(request.POST)
+
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            reservas = Consulta(nombre=data['nombre'], email=data['email'], telefono=data['telefono'], numero_personas=data['numero_personas'], dia=data['dia'], horario=data['horario'])
+
+            reservas.save()
+
+            return render(request, 'graciasReservas.html')
+
     else:
-        return render(request, "login.html")
 
+        miFormulario = ReservasForm()
 
-def carrito(request):
-    if request.user.is_authenticated:
-        return render(request, "carrito.html")
-    else:
-        return redirect("orders:login")
-        
-    return render(request, "resultadoBusqueda.html")
-
-
+    return render(request, "reservas.html", {"miFormulario": miFormulario})
 

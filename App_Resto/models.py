@@ -58,14 +58,6 @@ class Consulta(models.Model):
         verbose_name = 'Consulta'
         verbose_name_plural = 'Consultas'
 
-class Suscripcion(models.Model):
-
-    email = models.EmailField()
-
-
-    def __str__(self) -> str:
-        return f'{self.email}'
-
 
 
 class Franquicia(models.Model):
@@ -95,3 +87,17 @@ class Category(models.Model):
     def __str__(self):
         return f'{self.category_title}'
 
+class Reservas(models.Model):
+    nombre = models.CharField(max_length=50)
+    email = models.EmailField()
+    telefono = models.IntegerField()
+    numero_personas= models.IntegerField()
+    dia = models.DateField()
+    horario = models.TimeField()
+
+    class Meta:
+        verbose_name = "Reserva"
+        verbose_name_plural = "Reservas"
+
+    def __str__(self):
+        return f'{self.nombre}'

@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import path
 
-from App_Resto.models import Clientes, Pedidos, Productos, Suscripcion
+from App_Resto.models import Clientes, Pedidos, Productos
 
-from .views import buscar, busquedaProducto, consultas, contacto, franquicias, inicio, menu, nosotros, loginView, platos, register, carrito
+from .views import buscar, busquedaProducto, consultas, contacto, franquicias, inicio, menu, nosotros, loginView, platos, register, reservas
 
 from django.contrib.auth.views import LogoutView
 
@@ -24,6 +24,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='logout.html'), name="Logout"),
     path('registrar/', register, name="Registrar"),
     path("platos/", platos, name="Platos"),
-    path("carrito/", carrito, name="Carrito"),
-
+    path("reservas/", reservas, name="Reservas"),
     ]
