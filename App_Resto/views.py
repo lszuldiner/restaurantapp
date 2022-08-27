@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import json
 
-from App_Resto.forms import ContactoFormulario, FranquiciaForm, ReservasForm
-from App_Resto.models import Category, Consulta, Franquicia, Productos, Reservas
+from App_Resto.forms import ContactoFormulario, FranquiciaForm, ReservasForm, UserEditForm
+from App_Resto.models import Consulta, Franquicia, Productos, Reservas
 
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
@@ -111,11 +111,11 @@ def loginView(request):
 
     if request.method == 'POST':
 
-        miFormulario = AuthenticationForm(request, data=request.POST)
+        miForm = AuthenticationForm(request, data=request.POST)
 
-        if miFormulario.is_valid():
+        if miForm.is_valid():
 
-            data = miFormulario.cleaned_data
+            data = miForm.cleaned_data
 
             usuario = data["username"]
             psw = data["password"]
@@ -136,9 +136,40 @@ def loginView(request):
 
     else:
 
-        miFormulario = AuthenticationForm()
+        miForm = AuthenticationForm()
 
-    return render(request, "login.html", {"miFormulario": miFormulario})
+    return render(request, "login.html", {"miForm": miForm})
+
+
+def editarPerfil(request):
+    
+    print('method:', request.method)
+    print('post:', request.POST)
+
+    usuario = request.user
+
+    if request.method == 'POST':
+
+        miFormulario = UserEditForm(request.POST, instance=request.user)
+
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            usuario.first_name = data["first_name"]
+            usuario.last_name = data["last_name"]
+            usuario.email = data["email"]
+            usuario.password = data["password1"]
+
+            usuario.save()
+
+            return render(request, "inicio.html", {"mensaje": "Datos actualizados con éxito..."})
+
+    else:
+
+        miFormulario = UserEditForm(instance=request.user)
+
+    return render(request, "editarPerfil.html", {"miFormulario": miFormulario})
 
 
 def register(request):
@@ -160,15 +191,6 @@ def register(request):
         form = UserCreationForm()
 
     return render(request, "registro.html", {"miFormulario": form})
-
-
-def platos(request):
-
-    categories = Category.objects.all()
-
-    contexto = {"categories": categories}
-
-    return render(request, "platos.html", contexto)
 
 
 

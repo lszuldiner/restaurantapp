@@ -5,8 +5,8 @@
 
 {% block bloqueQueCambia %}
 
-
-<h1>MENU</h1>
+<br>
+  <h1>MENU</h1>
 <body style ="margin-left: 10em; margin-right: 1em">
   <div class="Collage effect-parent">
     <center>
@@ -36,7 +36,6 @@
 <center>
   <h5><font face="garamond">Busca algun plato especifico de nuestro menú</h5>
 </center>
-
   <form action= "{% url 'Buscar' %}"  method="GET">{% csrf_token %}
       <input type="text" name="prd">
       <input type="submit" name="buscar" value= "Buscar">
@@ -50,7 +49,7 @@
           <section class="containerProdutos">
             <div class="produto">
               <div class="productDescription">
-                <h3 class="produto__title">Hummus cremoso con pimentón y aceite de oliva</h3>
+                <h3 class="produto__title">Hummus cremoso con pimentón y aceite de oliva (Vegan)</h3>
                 <spam class="produto__price" style="color: green; font-weight: bold">$850.00</spam>
               </div>
               <a href=""><i class="produto__icon fas fa-cart-plus"></i></a>
@@ -65,7 +64,7 @@
             </div>
             <div class="produto">
               <div class="productDescription">
-                <h3 class="produto__title">Ensalada de farfalaj, chauchas, menta, pasas de uva y queso de cabra</h3>
+                <h3 class="produto__title">Ensalada de farfalaj, chauchas, menta, pasas de uva y queso de cabra (Veggie)</h3>
                 <spam class="produto__price" style="color: green; font-weight: bold">$1250.00</spam>
               </div>
               <a href=""><i class="produto__icon fas fa-cart-plus"></i></a>
@@ -96,7 +95,7 @@
                     <div class="produto">
                       <div class="productDescription">
                         <h3 class="produto__title">Girgolas doradas con pure de castañas de cajú, reducción de oporto y
-                            pesto de pasas y nueces</h3>
+                            pesto de pasas y nueces (Vegan)</h3>
                         <spam class="produto__price" style="color: green; font-weight: bold">$2100.00</spam>
                       </div>
                       <a href=""><i class="produto__icon fas fa-cart-plus"></i></a>

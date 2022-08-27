@@ -4,49 +4,28 @@
 
 
 {% block bloqueQueCambia %}
-<head>
-    <style>
-        footer{
-        text-align: center;
-        position: absolute;
-    }
-    </style>
-</head>
 <h1>MENU</h1>
 <body style ="margin-left: 10em; margin-right: 1em">
   <div class="Collage effect-parent">
     <center>
-    <img src="{% static 'assets/img/1.jpg' %}" width="225" height="275" >
-    <img src="{% static 'assets/img/2.jpg' %}" width="225" height="275">
-    <img src="{% static 'assets/img/3.jpg' %}" width="225" height="275">
-    <img src="{% static 'assets/img/4.jpg' %}" width="225" height="275">
-    <img src="{% static 'assets/img/5.jpg' %}" width="225" height="275">
-    <img src="{% static 'assets/img/6.jpg' %}" width="225" height="275">
-    <img src="{% static 'assets/img/7.jpg' %}" width="225" height="275">
-    <img src="{% static 'assets/img/8.jpg' %}" width="225" height="275">
-    <img src="{% static 'assets/img/9.jpg' %}" width="225" height="275">
-    <img src="{% static 'assets/img/10.jpg' %}" width="225" height="275">
-    <img src="{% static 'assets/img/11.jpg' %}" width="225" height="275">
-    <img src="{% static 'assets/img/12.jpg' %}" width="225" height="275">
+        <img src="{% static 'assets/img/1.jpg' %}" width="225" height="275" >
+        <img src="{% static 'assets/img/2.jpg' %}" width="225" height="275">
+        <img src="{% static 'assets/img/3.jpg' %}" width="225" height="275">
+        <img src="{% static 'assets/img/4.jpg' %}" width="225" height="275">
+        <img src="{% static 'assets/img/5.jpg' %}" width="225" height="275">
+        <img src="{% static 'assets/img/6.jpg' %}" width="225" height="275">
+        <img src="{% static 'assets/img/7.jpg' %}" width="225" height="275">
+        <img src="{% static 'assets/img/8.jpg' %}" width="225" height="275">
+        <img src="{% static 'assets/img/9.jpg' %}" width="225" height="275">
+        <img src="{% static 'assets/img/10.jpg' %}" width="225" height="275">
+        <img src="{% static 'assets/img/11.jpg' %}" width="225" height="275">
+        <img src="{% static 'assets/img/12.jpg' %}" width="225" height="275">
     </center>
   </div>
 
 
   
 <br>
-
-    <header class="masthead" style="background-image: url('{% static 'assets/img/comida.jpg'%}')">
-    <div class="container position-relative">
-        <div class="row justify-content-center">
-            <div class="col-xl-6">
-                <div class="text-center text-white">
-                    <!-- Page heading-->
-                    <h1 class="mb-5">MENU</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-  </header>
 
   <body style ="margin-left: 1em; margin-right: 1em">
     {% if productos %}
@@ -59,7 +38,7 @@
         </ul>
     {% else %}
         
-        <p>No hubo coincidencias</p>
+        <p>No hubo coincidencias. Volver a <A HREF="{% url 'Menu' %}"> MENU</A></p>
     {% endif %}
     </body>
 

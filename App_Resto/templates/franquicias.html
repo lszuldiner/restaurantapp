@@ -5,26 +5,45 @@
 
 {% block bloqueQueCambia %}
 <br>
+<br>
 <h1>FRANQUICIAS</h1>
-<h4>LANZAMOS NUESTRO PROGRAMA DE FRANQUICIAS PARA EL INTERIOR & EL EXTERIOR.</h4>
+<br>
+<h6>LANZAMOS NUESTRO PROGRAMA DE FRANQUICIAS. SI DESEA ABRIR UNA DE ELLAS, INSCRIBASE Y PRONTO LO CONTACTAREMOS</h6>
+<body>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col">
+          <div class="text-right">
+            <br>
+            <br>
+            <br>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3285.195457149816!2d-58.461115584840236!3d-34.5739205804672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb5347d67f839%3A0x43207495fcc04f65!2sAnafe!5e0!3m2!1sen!2sus!4v1661639553797!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+        <div class="col">
+                <font face="garamond">
+                    <form action="{% url 'Franquicias' %}" method="POST">{% csrf_token %}
+                        <br>
+                        <table><b>Nombre:</b> {{Formulario.nombre}} </table> 
+                        <br>
+                        <table><b>Apellido: </b> {{Formulario.apellido}} </table>
+                        <br>
+                        <table ><b>Email:</b> {{Formulario.email}} </table>
+                        <br>
+                        <table><b>Telefono:</b> {{Formulario.telefono}} </table>
+                        <br>
+                        <table><b>Zona:</b> {{Formulario.zona}} </table>
+                        <br>
+                        <input type="submit" value="Enviar">
+                    </form>
+                </font>    
+            </div>
+        </div>
+    </div>
+</body>
 
-    <font face="garamond">
-    <form action="{% url 'Franquicias' %}" method="POST">{% csrf_token %}
-        <br>
-        <table><b>Nombre:</b> {{Formulario.nombre}} </table> 
-        <br>
-        <table><b>Apellido: </b> {{Formulario.apellido}} </table>
-        <br>
-        <table ><b>Email:</b> {{Formulario.email}} </table>
-        <br>
-        <table><b>Telefono:</b> {{Formulario.telefono}} </table>
-        <br>
-        <table><b>Zona:</b> {{Formulario.zona}} </table>
-        <br>
-        <input type="submit" value="Enviar">
-        </font>
-    </form>
-    <br>
+
+
 
     
 {% endblock bloqueQueCambia %}

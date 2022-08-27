@@ -1,21 +1,11 @@
-
 from datetime import datetime
-from tabnanny import verbose
 from django.db import models
+from django.contrib.auth.models import User
+import django.utils.timezone
+
+
 
 # Create your models here.
-class Clientes(models.Model):
-    
-    nombre = models.CharField(max_length=30)
-    direccion = models.CharField(max_length=50)
-    email = models.EmailField()
-
-    def __str__(self) -> str:
-        return f'{self.nombre} - {self.direccion} - {self.email}'
-
-    class Meta():
-        verbose_name = 'Cliente'
-        verbose_name_plural = 'Clientes'
 
 class Productos(models.Model):
     
@@ -28,8 +18,6 @@ class Productos(models.Model):
     class Meta():
         verbose_name = 'Producto'
         verbose_name_plural = 'Productos'
-        verbose_name = 'Plato'
-        verbose_name_plural = 'Platos'
 
 class Pedidos(models.Model):
     
@@ -75,17 +63,7 @@ class Franquicia(models.Model):
         verbose_name = 'Franquicia'
         verbose_name_plural = 'Franquicias'
 
-class Category(models.Model):
-    category_title = models.CharField(max_length=200)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-    category_gif = models.ImageField(upload_to="Fotosprodu")
 
-    class Meta:
-        verbose_name = "Category"
-        verbose_name_plural = "Categories"
-    
-    def __str__(self):
-        return f'{self.category_title}'
 
 class Reservas(models.Model):
     nombre = models.CharField(max_length=50)
@@ -94,6 +72,7 @@ class Reservas(models.Model):
     numero_personas= models.IntegerField()
     dia = models.DateField()
     horario = models.TimeField()
+    user_is = models.OneToOneField(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Reserva"
