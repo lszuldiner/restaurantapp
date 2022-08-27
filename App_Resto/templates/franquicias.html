@@ -11,15 +11,15 @@
     <font face="garamond">
     <form action="{% url 'Franquicias' %}" method="POST">{% csrf_token %}
         <br>
-        <table><b>Nombre:</b>  &nbsp;&nbsp;&nbsp;{{Formulario.nombre}} </table> 
+        <table><b>Nombre:</b> {{Formulario.nombre}} </table> 
         <br>
-        <table><b>Apellido: </b> &nbsp;&nbsp; {{Formulario.apellido}} </table>
+        <table><b>Apellido: </b> {{Formulario.apellido}} </table>
         <br>
-        <table ><b>Email:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{Formulario.email}} </table>
+        <table ><b>Email:</b> {{Formulario.email}} </table>
         <br>
-        <table><b>Telefono:</b>&nbsp;&nbsp; {{Formulario.telefono}} </table>
+        <table><b>Telefono:</b> {{Formulario.telefono}} </table>
         <br>
-        <table><b>Zona:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{Formulario.zona}} </table>
+        <table><b>Zona:</b> {{Formulario.zona}} </table>
         <br>
         <input type="submit" value="Enviar">
         </font>

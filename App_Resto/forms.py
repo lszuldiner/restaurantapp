@@ -14,7 +14,6 @@ class FranquiciaForm(forms.Form):
     email = forms.EmailField()
     telefono = forms.IntegerField()
     zona = forms.CharField(max_length=50)
-    mensaje = forms.CharField(max_length=200)
 
 class ReservasForm(forms.Form):
     nombre = forms.CharField(max_length=50)
