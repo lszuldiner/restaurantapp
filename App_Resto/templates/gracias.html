@@ -5,10 +5,23 @@
 
 {% block bloqueQueCambia %}
 <body>
-
-    <h3>
-        Gracias por enviar su consulta! Pronto nos contactaremos con usted.
-    </h3>
+<br>
+    <h4>
+        Gracias por enviar su consulta! Pronto nos contactaremos con usted. 
+    </h4>
+    <p>Volver a <A HREF="{% url 'Consultas' %}"> CONSULTAS</A></p>
 </body>
-  
+
+<style>
+    .footer {
+      left: 0px;
+      bottom: 0px;
+      width: 100%;
+      position: absolute;
+      background-color: rgb(0, 0, 0);
+      color: white;
+      text-align: center;
+      margin-top:auto;
+    }
+    </style>
 {% endblock bloqueQueCambia %}

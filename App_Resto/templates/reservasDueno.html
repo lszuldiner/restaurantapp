@@ -5,21 +5,41 @@
 
 {% block bloqueQueCambia %}
 <br>
-<head>
-    <h1>RESERVAS QUE SE HICIERON</h1>
-</head>
+    <head>
+        <h1>RESERVAS QUE SE HICIERON</h1>
+    </head>
 
-<body>
-    <div>
-    {% for i in db %}
-        <p>Nombre: {{i.nombre}}</p>
-        <p>Email: {{i.email}}</p>
-        <p>Telefono: {{i.telefono}}</p>
-        <p>Cantidad de personas: {{i.numero_personas}}</p>
-        <p>Dia: {{i.dia}}</p>
-        <p>Horario: {{i.horario}}</p>
-    {% endfor %}
-    </div>
-</body>  
+    <body>
+            {% for i in db %}
+            <table>
+                <p>Nombre: {{i.nombre}}- Email: {{i.email}} - Telefono: {{i.telefono}}- Cantidad de personas: {{i.numero_personas}}- Dia: {{i.dia}}- Horario: {{i.horario}}</p>
+                <button>
+                    <a href="{% url 'EliminarReserva' i.id %}">Eliminar</a>
+                </button>
+                <button>
+                    <a href="{% url 'ActualizarReserva' i.id %}">Editar</a>
+                </button>
+                <button>
+                    <a href="{% url 'DetailReserva' i.id %}">Detalles</a>
+                </button>
+            </table>
+            {% endfor %}
+    </body>  
 
+
+
+
+    <style>
+        .footer {
+          left: 0px;
+          bottom: 0px;
+          width: 100%;
+          position: absolute;
+          background-color: rgb(0, 0, 0);
+          color: white;
+          text-align: center;
+          margin-top:auto;
+        }
+        </style>
+    
 {% endblock bloqueQueCambia %}

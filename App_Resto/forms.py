@@ -20,9 +20,12 @@ class FranquiciaForm(forms.Form):
     zona = forms.CharField(max_length=50)
 
 class ReservasForm(forms.Form):
-    class Meta:
-        model = Reservas
-        fields = '__all__'
+    nombre = forms.CharField(max_length=50)
+    email = forms.EmailField()
+    telefono = forms.IntegerField()
+    numero_personas= forms.IntegerField()
+    dia = forms.DateField()
+    horario = forms.TimeField()
 
 
 class UserEditForm(UserChangeForm):

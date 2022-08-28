@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -123,7 +124,6 @@ def loginView(request):
 
 @login_required
 def reservasDueno(request):
-
     db = Reservas.objects.all()
     return render(request, 'reservasDueno.html', {'db':db})
 
@@ -145,7 +145,7 @@ def reservasClientes(request):
 
             reservas.save()
 
-            return redirect ('graciasReservas.html')
+            return render(request, 'graciasReservas.html')
 
     else:
 
@@ -183,6 +183,32 @@ def editarPerfil(request):
         miFormulario = UserEditForm(instance=request.user)
 
     return render(request, "editarPerfil.html", {"miFormulario": miFormulario})
+
+
+
+
+
+
+
+class ReservaUpdate(UpdateView):
+
+    model = Reservas
+    template_name = 'reservasUpdate.html'
+    fields = ('__all__')
+    success_url = '/App_Resto/reservasDueno'
+
+class ReservaDelete(DeleteView):
+
+    model = Reservas
+    template_name = 'reservasDelete.html'
+    success_url = '/App_Resto/reservasDueno'
+
+class ReservaDetail(DetailView):
+
+    model = Reservas
+    template_name = 'reservasDetail.html'
+    context_object_name = '/App_Resto/reservasDueno'
+
 
 
 
