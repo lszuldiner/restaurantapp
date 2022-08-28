@@ -1,6 +1,7 @@
 from django.http import HttpResponse
+from django.contrib import messages
 from django.shortcuts import render, redirect
-import json
+from django.contrib.auth.models import User, auth
 
 from App_Resto.forms import AvatarFormulario, ContactoFormulario, FranquiciaForm, ReservasForm, UserEditForm
 from App_Resto.models import Avatar, Consulta, Franquicia, Productos, Reservas
@@ -13,8 +14,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
-
-from django.shortcuts import render
 
 from App_Resto.forms import ContactoFormulario
 from App_Resto.models import Consulta, Productos
@@ -105,40 +104,54 @@ def franquicias(request):
 
 
 def loginView(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
 
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect('ReservasDueno')
+        else:
+            messages.info(request, 'Usuario Invalido')
+            return redirect('Login')
+
+    else:
+        return render(request, 'login.html')
+
+
+@login_required
+def reservasDueno(request):
+
+    db = Reservas.objects.all()
+    return render(request, 'reservasDueno.html', {'db':db})
+
+
+
+def reservasClientes(request):
     print('method:', request.method)
     print('post:', request.POST)
 
     if request.method == 'POST':
 
-        miForm = AuthenticationForm(request, data=request.POST)
+        form = ReservasForm(request.POST)
 
-        if miForm.is_valid():
+        if form.is_valid():
 
-            data = miForm.cleaned_data
+            data = form.cleaned_data
 
-            usuario = data["username"]
-            psw = data["password"]
+            reservas = Reservas(nombre=data['nombre'], email=data['email'], telefono=data['telefono'], numero_personas=data['numero_personas'], dia=data['dia'], horario=data['horario'])
 
-            user = authenticate(username=usuario, password=psw)
+            reservas.save()
 
-            if user:
-
-                login(request, user)
-
-                return render(request, "reservasDueno.html", {"mensaje": f'Bienvenido {usuario}'})
-
-            else:
-
-                return render(request, "reservasDueno.html", {"mensaje": "Error, datos incorrectos"})
-
-        return render(request, "reservasDueno.html", {"mensaje": "Error, formulario invalido"})
+            return redirect ('graciasReservas.html')
 
     else:
 
-        miForm = AuthenticationForm()
+        form = ReservasForm()
 
-    return render(request, "login.html", {"miForm": miForm})
+    return render(request, "reservasCliente.html", {"form": form})
 
 
 def editarPerfil(request):
@@ -220,34 +233,6 @@ def register(request):
     return render(request, "registro.html", {"miFormulario": form})
 
 
-@login_required
-def reservasDueno(request):
-
-    db = Reservas.objects.all()
-    return render(request, 'reservasDueno.html', {'db':db})
 
 
 
-def reservasClientes(request):
-    print('method:', request.method)
-    print('post:', request.POST)
-
-    if request.method == 'POST':
-
-        form = ReservasForm(request.POST)
-
-        if form.is_valid():
-
-            data = form.cleaned_data
-
-            reservas = Reservas(nombre=data['nombre'], email=data['email'], telefono=data['telefono'], numero_personas=data['numero_personas'], dia=data['dia'], horario=data['horario'])
-
-            reservas.save()
-
-            return render(request, 'graciasReservas.html')
-
-    else:
-
-        form = ReservasForm()
-
-    return render(request, "reservasCliente.html", {"form": form})

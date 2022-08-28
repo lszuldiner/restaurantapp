@@ -6,7 +6,7 @@ from App_Resto.models import Pedidos, Productos
 from .views import agregar_avatar, buscar, busquedaProducto, consultas, contacto, editarPerfil, franquicias, inicio, menu, nosotros, loginView, register, reservasClientes, reservasDueno
 
 from django.contrib.auth.views import LogoutView
-
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [

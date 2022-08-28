@@ -10,10 +10,48 @@
 </head>
 
 <body>
-    <form method="POST">{% csrf_token %}
-        {{form.as_p}}
-        <button>submit</button>
-    </form>
+<form action="{% url 'ReservasClientes' %}" method="post" name="Userinfo" id="Userinfo">{% csrf_token %}
+	<fieldset>
+		<div class="double-input">
+			<div class="form-input-container">
+				<label for="fname">Nombre y Apellido</label>
+				<input type="text" name="firstname" id="fname" placeholder="Pepe Argento" minlength="3" required/>
+			</div>
+		</div>
+		<div class="double-input">
+			<div class="form-input-container">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" required placeholder="pepe.argento@mail.com" required/>
+			</div>
+			<div class="form-input-container">
+				<label for="phone">Telefono</label>
+				<input type="tel" name="phone" id="phone" placeholder="213 742 069" required/>
+			</div>
+		</div>
+	</fieldset>
+		<fieldset>
+		<div class="double-input">
+			<div class="form-input-container">
+				<label for="hotelcity">Horario</label>
+				<select name="hotelcity" id="hotelcity">
+					<option value="Wroclaw">19.00hs</option>
+					<option value="Warsaw">20.30hs</option>
+					<option value="Plock">22.00</option>
+				</select>
+			</div>
+			<div class="form-input-container">
+				<label for="capacity">Cantidad de Personas</label>
+				<input type="number" name="capacity" id="capacity" value="" min="1" max="6" step="1" />
+			</div>
+		</div>
+		<div class="double-input">
+            <label for="dia">Dia</label>
+            <input type="date" name="dia" id="dia" value="" min="" max="">           
+		</div>
+	</fieldset>
+	<button type="submit">Solicitar reserva</button>
+</form>
+    
 </body>  
 
 {% endblock bloqueQueCambia %}
