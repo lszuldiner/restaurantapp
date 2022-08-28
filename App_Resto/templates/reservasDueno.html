@@ -1,0 +1,25 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+<br>
+<head>
+    <h1>RESERVAS QUE SE HICIERON</h1>
+</head>
+
+<body>
+    <div>
+    {% for i in db %}
+        <p>Nombre: {{i.nombre}}</p>
+        <p>Email: {{i.email}}</p>
+        <p>Telefono: {{i.telefono}}</p>
+        <p>Cantidad de personas: {{i.numero_personas}}</p>
+        <p>Dia: {{i.dia}}</p>
+        <p>Horario: {{i.horario}}</p>
+    {% endfor %}
+    </div>
+</body>  
+
+{% endblock bloqueQueCambia %}

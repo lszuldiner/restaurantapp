@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import json
 
-from App_Resto.forms import ContactoFormulario, FranquiciaForm, ReservasForm, UserEditForm
-from App_Resto.models import Consulta, Franquicia, Productos, Reservas
+from App_Resto.forms import AvatarFormulario, ContactoFormulario, FranquiciaForm, ReservasForm, UserEditForm
+from App_Resto.models import Avatar, Consulta, Franquicia, Productos, Reservas
 
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
@@ -126,13 +126,13 @@ def loginView(request):
 
                 login(request, user)
 
-                return render(request, "inicio.html", {"mensaje": f'Bienvenido {usuario}'})
+                return render(request, "reservasDueno.html", {"mensaje": f'Bienvenido {usuario}'})
 
             else:
 
-                return render(request, "inicio.html", {"mensaje": "Error, datos incorrectos"})
+                return render(request, "reservasDueno.html", {"mensaje": "Error, datos incorrectos"})
 
-        return render(request, "inicio.html", {"mensaje": "Error, formulario invalido"})
+        return render(request, "reservasDueno.html", {"mensaje": "Error, formulario invalido"})
 
     else:
 
@@ -172,6 +172,33 @@ def editarPerfil(request):
     return render(request, "editarPerfil.html", {"miFormulario": miFormulario})
 
 
+
+def agregar_avatar(request):
+
+    print('method:', request.method)
+    print('post:', request.POST)
+
+    if request.method == 'POST':
+
+        miFormulario = AvatarFormulario(request.POST, request.FILES)
+
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            avatar = Avatar(user=request.user, imagen=data['imagen'])
+
+            avatar.save()
+
+            return render(request, 'inicio.html', {"mensaje": "Avatar cargado"})
+
+    else:
+
+        miFormulario = AvatarFormulario()
+
+    return render(request, "agregarAvatar.html", {"miFormulario": miFormulario})
+
+
 def register(request):
 
     if request.method == 'POST':
@@ -193,21 +220,27 @@ def register(request):
     return render(request, "registro.html", {"miFormulario": form})
 
 
+@login_required
+def reservasDueno(request):
 
-def reservas(request):
+    db = Reservas.objects.all()
+    return render(request, 'reservasDueno.html', {'db':db})
 
+
+
+def reservasClientes(request):
     print('method:', request.method)
     print('post:', request.POST)
 
     if request.method == 'POST':
 
-        miFormulario = ReservasForm(request.POST)
+        form = ReservasForm(request.POST)
 
-        if miFormulario.is_valid():
+        if form.is_valid():
 
-            data = miFormulario.cleaned_data
+            data = form.cleaned_data
 
-            reservas = Consulta(nombre=data['nombre'], email=data['email'], telefono=data['telefono'], numero_personas=data['numero_personas'], dia=data['dia'], horario=data['horario'])
+            reservas = Reservas(nombre=data['nombre'], email=data['email'], telefono=data['telefono'], numero_personas=data['numero_personas'], dia=data['dia'], horario=data['horario'])
 
             reservas.save()
 
@@ -215,7 +248,6 @@ def reservas(request):
 
     else:
 
-        miFormulario = ReservasForm()
+        form = ReservasForm()
 
-    return render(request, "reservas.html", {"miFormulario": miFormulario})
-
+    return render(request, "reservasCliente.html", {"form": form})

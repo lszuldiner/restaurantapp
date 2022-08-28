@@ -72,7 +72,6 @@ class Reservas(models.Model):
     numero_personas= models.IntegerField()
     dia = models.DateField()
     horario = models.TimeField()
-    user_is = models.OneToOneField(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Reserva"
@@ -80,3 +79,9 @@ class Reservas(models.Model):
 
     def __str__(self):
         return f'{self.nombre}'
+
+
+class Avatar(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='avatares', blank=True, null=True)
+
