@@ -1,7 +1,10 @@
+from datetime import datetime
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from .models import Reservas
+from django.db.models import IntegerField, Model
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 from App_Resto.models import Avatar
 
@@ -22,10 +25,11 @@ class FranquiciaForm(forms.Form):
 class ReservasForm(forms.Form):
     nombre = forms.CharField(max_length=50)
     email = forms.EmailField()
-    telefono = forms.IntegerField()
-    numero_personas= forms.IntegerField()
-    dia = forms.DateField()
-    horario = forms.TimeField()
+    telefono = forms.IntegerField(initial= 1122334455, min_value=10000000,max_value=1600000000)
+    numero_personas= forms.IntegerField(
+        initial=1,min_value=1,max_value=6,help_text="Minimo 1, Máximo 6 personas por mesa")
+    dia = forms.DateField(help_text="Ingrese Fecha (Dia,Mes,Año)", initial=datetime.today)
+    horario = forms.TimeField(help_text="Ingrese hora (Hora:Minutos)")
 
 
 class UserEditForm(UserChangeForm):

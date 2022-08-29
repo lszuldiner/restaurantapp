@@ -1,0 +1,15 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+{% block bloqueQueCambia %}
+<h1>Menu</h1>
+<ul>
+    {% for producto in  %}
+
+    <li>{{producto}}</li>
+
+    {% endfor %}
+</ul>
+
+{% endblock bloqueQueCambia %}

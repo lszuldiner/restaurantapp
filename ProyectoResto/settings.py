@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'App_Resto'
+    'App_Resto',
+    'App_Usuarios'
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,4 @@ LOGIN_URL = '/App_Resto/login/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

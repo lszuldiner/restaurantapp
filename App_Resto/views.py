@@ -3,7 +3,11 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 
-from App_Resto.forms import AvatarFormulario, ContactoFormulario, FranquiciaForm, ReservasForm, UserEditForm
+from App_Resto.forms import (
+    AvatarFormulario, ContactoFormulario,
+     FranquiciaForm, ReservasForm, UserEditForm
+)
+
 from App_Resto.models import Avatar, Consulta, Franquicia, Productos, Reservas
 
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
@@ -13,11 +17,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse_lazy
-
-# Create your views here.
-
-from App_Resto.forms import ContactoFormulario
-from App_Resto.models import Consulta, Productos
 
 # Create your views here.
 def inicio(self):
@@ -121,6 +120,9 @@ def loginView(request):
     else:
         return render(request, 'login.html')
 
+def leermenu(request):
+    menu = Productos.objects.all()
+    return render(request, 'leermenu.html', {'menu':menu})
 
 @login_required
 def reservasDueno(request):
@@ -257,6 +259,12 @@ def register(request):
         form = UserCreationForm()
 
     return render(request, "registro.html", {"miFormulario": form})
+
+
+
+
+
+
 
 
 

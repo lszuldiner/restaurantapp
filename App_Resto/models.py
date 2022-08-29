@@ -5,6 +5,7 @@ import django.utils.timezone
 
 
 
+
 # Create your models here.
 
 class Productos(models.Model):
@@ -13,7 +14,7 @@ class Productos(models.Model):
     precio = models.IntegerField()
 
     def __str__(self) -> str:
-        return f'{self.nombre} - {self.precio}'
+        return f'{self.nombre} - ${self.precio}'
 
     class Meta():
         verbose_name = 'Producto'
