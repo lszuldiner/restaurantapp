@@ -14,6 +14,9 @@ class ContactoFormulario(forms.Form):
     email = forms.EmailField()
     mensaje = forms.CharField(max_length=200)
 
+class ProductosForm(forms.Form):
+    nombre = forms.CharField(max_length=150)
+    precio = forms.IntegerField()
 
 class FranquiciaForm(forms.Form):
     nombre = forms.CharField(max_length=50)

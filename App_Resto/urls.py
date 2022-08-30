@@ -3,7 +3,7 @@ from django.urls import path
 
 from App_Resto.models import Pedidos, Productos
 
-from .views import ReservaDelete, ReservaDetail, ReservaUpdate, agregar_avatar, buscar, busquedaProducto, consultas, contacto, editarPerfil, franquicias, inicio, leermenu, menu, nosotros, loginView, register, reservasClientes, reservasDueno
+from .views import Agregarmenu, ReservaDelete, ReservaDetail, ReservaUpdate, agregar_avatar, buscar, busquedaProducto, consultas, contacto, editarPerfil, franquicias, inicio, leermenu, menu, nosotros, loginView, register, reservasClientes, reservasDueno
 
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
@@ -13,6 +13,7 @@ urlpatterns = [
     path('', inicio, name="Inicio"),
     path('menu/', menu, name="Menu"),
     path('leermenu/', leermenu, name="LeerMenu"),
+     path('agregarmenu/', Agregarmenu, name="agregarMenu"),
     path('nosotros/', nosotros, name="Nosotros"),
     path('busquedaProducto/', busquedaProducto, name="BusquedaProducto"),
     path('consultas/', contacto, name="Consultas"),

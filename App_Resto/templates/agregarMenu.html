@@ -1,0 +1,15 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+
+    <form action="{% url 'agregarMenu' %}" method="POST"> {% csrf_token %}
+
+        {{productos.as_p}}
+        
+        <input type="submit" value="Enviar">
+    </form>
+
+{% endblock bloqueQueCambia %}

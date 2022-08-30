@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -5,7 +6,7 @@ from django.contrib.auth.models import User, auth
 
 from App_Resto.forms import (
     AvatarFormulario, ContactoFormulario,
-     FranquiciaForm, ReservasForm, UserEditForm
+     FranquiciaForm, ProductosForm, ReservasForm, UserEditForm
 )
 
 from App_Resto.models import Avatar, Consulta, Franquicia, Productos, Reservas
@@ -122,7 +123,35 @@ def loginView(request):
 
 def leermenu(request):
     menu = Productos.objects.all()
-    return render(request, 'leermenu.html', {'menu':menu})
+    contexto= {"menu":menu}
+    return render(request, 'leermenu.html', contexto)
+
+def Agregarmenu(request):
+    print('method:', request.method)
+    print('post:', request.POST)
+
+    if request.method == 'POST':
+
+        productos = ProductosForm(request.POST)
+
+        if productos.is_valid():
+
+            data = productos.cleaned_data
+
+            producto = Productos(nombre=data['nombre'], precio=data['precio'])
+
+            producto.save()
+            mensaje = "Producto agregado correctamente"
+
+            return render(request, 'leermenu.html',mensaje)
+    else:
+
+        productos = ProductosForm()
+        contexto= {"productos":productos}
+
+    return render(request, "agregarMenu.html", contexto)
+
+
 
 @login_required
 def reservasDueno(request):
