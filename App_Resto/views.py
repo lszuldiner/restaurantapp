@@ -120,11 +120,13 @@ def loginView(request):
 
     else:
         return render(request, 'login.html')
-
+                                            #LEER MENU#
 def leermenu(request):
     menu = Productos.objects.all()
     contexto= {"menu":menu}
     return render(request, 'leermenu.html', contexto)
+
+                                            #AGREGAR MENU#
 
 def Agregarmenu(request):
     print('method:', request.method)
@@ -141,9 +143,8 @@ def Agregarmenu(request):
             producto = Productos(nombre=data['nombre'], precio=data['precio'])
 
             producto.save()
-            mensaje = "Producto agregado correctamente"
 
-            return render(request, 'leermenu.html',mensaje)
+            return render(request, 'inicio.html')
     else:
 
         productos = ProductosForm()
@@ -151,6 +152,51 @@ def Agregarmenu(request):
 
     return render(request, "agregarMenu.html", contexto)
 
+                                            #ELIMINAR MENU#
+
+def Eliminarmenu(request, id):
+    print('method:', request.method)
+    print('post:', request.POST)
+
+    if request.method == 'POST':
+
+        producto = Productos.objects.get(id=id)
+
+        producto.delete()
+
+        menu = Productos.objects.all()
+
+        contexto = {"menu":menu}
+
+        return render(request, "leermenu.html",contexto)
+
+def Editarmenu(request, id):
+    print('method:', request.method)
+    print('post:', request.POST)
+    producto = Productos.objects.get(id=id)
+
+    if request.method == 'POST':
+
+        menu = ProductosForm(request.POST)
+
+        if menu.is_valid():
+
+            data = menu.cleaned_data
+
+            producto.nombre = data ["nombre"]
+            producto.precio = data ["precio"]
+
+            producto.save()
+
+            return render(request, 'inicio.html')
+    else:
+
+        menu = ProductosForm(initial={
+            "nombre": producto.nombre,
+            "precio": producto.precio,
+        })
+        contexto = {"menu":menu, "id":producto.id}
+    return render(request, "editarmenu.html", contexto)
 
 
 @login_required

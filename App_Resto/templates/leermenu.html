@@ -3,31 +3,55 @@
 {% load static %}
 
 {% block bloqueQueCambia %}
+<html>
+        <head>
+            <style> 
 
-<body style ="margin-left: 1em; margin-right: 1em;"> 
+            </style>
+        </head>
 
-    <h1>{{mensaje}}</h1>
-    <div>
-    <br>  
-    <center>
-      <h5><font face="garamond">Busca algun plato especifico de nuestro menú</h5>
-    </center>
-      <form action= "{% url 'Buscar' %}"  method="GET">{% csrf_token %}
-          <input type="text" name="prd">
-          <input type="submit" name="buscar" value= "Buscar">
-      </form>
-      <center>
-    </div>
-    <div>
-<h1>Menu</h1>
-<ul>
-    {% for producto in menu %}
-
-    <li><spam style="font-weight: bold;"> {{producto.nombre}} </spam> - <spam style ="color: green; font-weight: bold; font-size: large;">${{producto.precio}}</spam></li>
-<br>
-    {% endfor %}
-</ul>
-</div>
-</body>
+        <body style ="margin-left: 1em; margin-right: 1em;"> 
+            <div>
+            <br>  
+            <center>
+              <h5><font face="garamond">Busca algun plato especifico de nuestro menú</h5>
+            
+              <form action= "{% url 'Buscar' %}"  method="GET">{% csrf_token %}
+                  <input type="text" name="prd">
+                  <input type="submit" name="buscar" value= "Buscar">
+              </form>
+            </center>
+            </div>
+            <div>
+                <center><h1>Menu</h1>
+                    <button style="font-size: 1em; width: 14ch; height: 6ch;">
+                    <a href="{% url 'agregarMenu' %}">agregar platillo</a></center>
+                    </button></center>
+                <br>
+                <center><hr width="33%" color="black"  /></center>
+                <br>
+                <ul style="line-height: 0;">
+                {% for producto in menu %}
+                     
+                    <p style="line-height: 1">
+                            <spam style="font-weight: bold;"> {{producto.nombre}} - </spam> <spam style ="color: green; font-weight: bold; font-size: large;">${{producto.precio}}</spam>
+                    
+                    <button style="font-size: 0.7em; width: 12ch; height: 6ch;" >
+                        <a href="{% url 'editarMenu' producto.id %}">Editar</a>
+                    </button>
+                        <form action="{% url 'eliminarMenu' producto.id %}" method="POST">{% csrf_token %}
+                        <button type="submit" style="font-size: 0.7em; width: 12ch; height: 6ch;" >Eliminar</button>
+                        </form>
+                    </p>
+                {% endfor %}
+            </ul>
+                <center><hr width="33%" color="black"  />
+                <button style="font-size: 1em; width: 14ch; height: 6ch;">
+                <a href="{% url 'agregarMenu' %}">agregar platillo</a></center>
+                </button>
+                <br>
+            </div>
+        </body>
+</html>
 
 {% endblock bloqueQueCambia %}

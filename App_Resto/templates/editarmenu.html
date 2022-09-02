@@ -1,0 +1,16 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+
+    <form action="{% url 'editarMenu' id %}" method="POST">{% csrf_token %}
+
+        {{menu.as_p}}
+
+        <input type="submit" value="Guardar">
+
+    </form>
+
+{% endblock bloqueQueCambia %}

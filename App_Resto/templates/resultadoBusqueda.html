@@ -31,7 +31,7 @@
     {% if productos %}
         <ul>
             {% for producto in productos %}
-                    <h4>Producto encontrado: {{producto.nombre}}</h4><b>Precio: ${{producto.precio}}</b>  <p>Volver a <A HREF="{% url 'Menu' %}"> MENU</A></p>
+                    <p><h4>Producto encontrado: {{producto.nombre}}</h4><b style="color: green;">Precio: ${{producto.precio}}</b></p>  <p>Volver a <A HREF="{% url 'LeerMenu' %}"> MENU</A></p>
             {% endfor %}
         </ul>
     {% else %}
