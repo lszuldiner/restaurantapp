@@ -11404,13 +11404,6 @@ footer.footer {
 }
 
 
-
-form {
-  width: 500px;
-  margin: 0 auto;
-  padding: 50px;
-}
-
 div.elem-group {
   margin: 20px 0;
 }
@@ -11449,10 +11442,11 @@ textarea {
 }
 
 hr {
-  border: 1px dotted #ccc;
+  border: 1px #ccc;
 }
 
 button {
+  
   height: 50px;
   background: orange;
   border: none;
@@ -11461,6 +11455,7 @@ button {
   font-family: 'Nanum Gothic';
   border-radius: 4px;
   cursor: pointer;
+  width: 12ch; height: 6ch
 }
 
 button:hover {

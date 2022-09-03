@@ -6,10 +6,17 @@
 {% block bloqueQueCambia %}
 <br>
     <head>
-        <h1>RESERVAS</h1>
+        <style>
+            form {
+  width: 500px;
+  margin: 0 auto;
+  padding: 50px;
+}
+        </style>
+       
     </head>
 
-    <body>
+    <body> <h1>RESERVAS</h1>
         <form method="POST">{% csrf_token %}
             {{form.as_p}}
             <button>Solicitar Reserva</button>

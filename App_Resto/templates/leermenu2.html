@@ -1,0 +1,67 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+{% block bloqueQueCambia %}
+<html>
+    <head>
+        <style>
+            form {
+              width: 5px;
+              margin: 0 ;
+              padding: 5px;
+            }
+            a{
+                color: black;
+            }
+            button {
+  height: 50px;
+  background: orange;
+  border: none;
+  color: black;
+  font-size: 1em;
+  font-family: 'Nanum Gothic';
+  border-radius: 4px;
+  cursor: pointer;
+}
+        </style>
+    </head>
+
+    <body> 
+        <div>
+        <br> 
+        <h5>Busca algun plato especifico de nuestro menú</h5>
+            <form action= "{% url 'Buscar' %}"  method="GET">{% csrf_token %}
+                <input type="text" name="prd">
+                <input type="submit" name="buscar" value= "Buscar">
+            </form>
+        </div>
+        <div>
+            <h1>Menu</h1>
+            <button>
+                <a href="{% url 'agregarMenu' %}">agregar platillo</a>
+            </button>
+            <br>
+            <ul>
+            {% for producto in menu %}
+                     
+                <p>
+                    <spam style="font-weight: bold;"> {{producto.nombre}} - </spam> <spam style ="color: green; font-weight: bold; font-size: large;">${{producto.precio}}</spam>
+                    <button>
+                        <a href="{% url 'editarMenu' producto.id %}">Editar</a>
+                    </button>
+                    <form action="{% url 'eliminarMenu' producto.id %}" method="POST">{% csrf_token %}
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </p>
+            {% endfor %}
+            </ul>
+            <button>
+                <a href="{% url 'agregarMenu' %}">agregar platillo</a>
+            </button>
+            <br>
+        </div>
+    </body>
+</html>
+
+{% endblock bloqueQueCambia %}

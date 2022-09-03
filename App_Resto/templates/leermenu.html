@@ -5,8 +5,25 @@
 {% block bloqueQueCambia %}
 <html>
         <head>
-            <style> 
+            <style>
+            form {
+  width: 500px;
+  padding:0ch;
+}
 
+            a{
+            color: black;
+            }
+            button {
+            height: 50px;
+            background: orange;
+            border: none;
+            color: black;
+            font-size: 1em;
+            font-family: 'Nanum Gothic';
+            border-radius: 4px;
+            cursor: pointer;
+            }
             </style>
         </head>
 
@@ -35,14 +52,18 @@
                      
                     <p style="line-height: 1">
                             <spam style="font-weight: bold;"> {{producto.nombre}} - </spam> <spam style ="color: green; font-weight: bold; font-size: large;">${{producto.precio}}</spam>
-                    
-                    <button style="font-size: 0.7em; width: 12ch; height: 6ch;" >
-                        <a href="{% url 'editarMenu' producto.id %}">Editar</a>
-                    </button>
-                        <form action="{% url 'eliminarMenu' producto.id %}" method="POST">{% csrf_token %}
-                        <button type="submit" style="font-size: 0.7em; width: 12ch; height: 6ch;" >Eliminar</button>
-                        </form>
                     </p>
+                    <div>
+                        <p>
+                            <button style="font-size: 0.7em; width: 12ch; height: 6ch;" >
+                                <a href="{% url 'editarMenu' producto.id %}">Editar</a>
+                            </button>
+                            <form action="{% url 'eliminarMenu' producto.id %}" method="POST">{% csrf_token %}
+                                <button type="submit" style="font-size: 0.7em; width: 12ch; height: 6ch;" >Eliminar</button>
+                            </form>
+                        </p>
+                    </div>
+                    
                 {% endfor %}
             </ul>
                 <center><hr width="33%" color="black"  />
