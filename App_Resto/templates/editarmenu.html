@@ -4,7 +4,14 @@
 
 
 {% block bloqueQueCambia %}
-
+<head>
+    <style>
+                    form {
+  width: 500px;
+  padding:0ch;
+}
+    </style>
+</head>
     <form action="{% url 'editarMenu' id %}" method="POST">{% csrf_token %}
 
         {{menu.as_p}}
