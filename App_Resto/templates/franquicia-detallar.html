@@ -1,0 +1,30 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+  
+<br><br>
+
+  <div style="padding: 10px; font-family: garamond; margin-left: 25%;">
+    <h2>Franquicia n°: {{object.id}}</h2><br>
+    <hr width="45%"><br>
+    <ul>
+    <p><b>Interesado: "{{object.nombre}} {{object.apellido}}"</b></p>
+  <p><b>Zona : "{{object.zona}}"</b></p>
+  <p><b>Telefono : "<span style="color: green;">{{object.telefono}}</span>"</b></p>
+  <p><b>Email: "{{object.email}}"</b></p>
+</ul>
+  <br>
+  <hr width="45%"> 
+  <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'FranquiciaListar' %}">Volver al menú</a></button>
+</div>
+</body>
+</html>
+{% endblock bloqueQueCambia %}

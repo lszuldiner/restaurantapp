@@ -162,7 +162,7 @@ class consultaCreateView(CreateView):
     model = Consulta
     template_name = "consulta-crear.html"
     fields= ('__all__')
-    success_url= '/App_Resto/consulta-listar'
+    success_url= '/App_Resto/'
 
 class consultaUpdateView(UpdateView):
     model = Consulta
@@ -176,10 +176,37 @@ class consultaDetailView(DetailView):
 
 class consultaDeleteView(DeleteView):
     model = Consulta
-    template_name = "menu-eliminar.html"
+    template_name = "consulta-eliminar.html"
     success_url= '/App_Resto/consulta-listar'
 
-############################################################
+###################################FRANQUICIAS#########################
+
+
+class franquiciaListView(ListView):
+    model = Franquicia
+    template_name = "franquicia-listar.html"
+
+class franquiciaCreateView(CreateView):
+    model = Franquicia
+    template_name = "franquicia-crear.html"
+    fields= ('__all__')
+    success_url= '/App_Resto/'
+
+class franquiciaUpdateView(UpdateView):
+    model = Franquicia
+    template_name = "franquicia-editar.html"
+    fields= ('__all__')
+    success_url= '/App_Resto/franquicia-listar'
+
+class franquiciaDetailView(DetailView):
+    model = Franquicia
+    template_name = "franquicia-detallar.html"
+
+class franquiciaDeleteView(DeleteView):
+    model = Franquicia
+    template_name = "menu-eliminar.html"
+    success_url= '/App_Resto/franquicia-listar'
+
 
 @login_required
 def reservasDueno(request):

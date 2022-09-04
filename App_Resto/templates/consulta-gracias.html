@@ -1,0 +1,39 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+<head>
+    <style>
+        
+            button {
+            height: 50px;
+            background: orange;
+            border: none;
+            color: black;
+            font-size: 1em;
+            font-family: 'Nanum Gothic';
+            border-radius: 4px;
+            cursor: pointer;
+            }
+            form {
+            width: 500px;
+            margin: 0 auto;
+            padding: 50px;
+            }
+    </style>
+</head>
+<body style="font-family: garamond ;">
+    <br>
+<center><h1>GRACIAS POR DEJARNOS TU CONSULTA</h1>
+<hr style="width: 45%;">
+<center><h6>Te Responderemos en breve ;)</h6></center>
+<hr style="width: 33%;">
+<br>
+    <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'Inicio' %}">Volver al inicio</a></button>
+</center>
+<br>
+    
+</body>
+{% endblock bloqueQueCambia %}
