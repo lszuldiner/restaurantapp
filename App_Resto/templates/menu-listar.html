@@ -1,0 +1,99 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+
+<html>
+        <head>
+            <style>
+                ul {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  margin-left: 400px;
+  margin-right: 400px;
+}
+            form {
+  width: 500px;
+  padding:0.15ch;
+}
+
+            a{
+            color: black;
+            }
+            button {
+            height: 50px;
+            background: orange;
+            border: none;
+            color: black;
+            font-size: 1em;
+            font-family: 'Nanum Gothic';
+            border-radius: 4px;
+            cursor: pointer;
+            }
+            </style>
+        </head>
+          <body style ="margin-left: 10em; margin-right: 1em">
+            <br>
+            <div class="Collage effect-parent">
+              <center>
+                <img src="{% static 'assets/img/1.jpg' %}" width="225" height="275" >
+                <img src="{% static 'assets/img/2.jpg' %}" width="225" height="275">
+                <img src="{% static 'assets/img/3.jpg' %}" width="225" height="275">
+                <img src="{% static 'assets/img/4.jpg' %}" width="225" height="275">
+                <img src="{% static 'assets/img/5.jpg' %}" width="225" height="275">
+                <img src="{% static 'assets/img/6.jpg' %}" width="225" height="275">
+                <img src="{% static 'assets/img/7.jpg' %}" width="225" height="275">
+                <img src="{% static 'assets/img/8.jpg' %}" width="225" height="275">
+
+                </center>
+            </div>
+            <div>
+            <br>  
+            <center>
+              <h5><font face="garamond">Busca algun plato especifico de nuestro menú</h5>
+            
+              <form action= "{% url 'Buscar' %}"  method="GET">{% csrf_token %}
+                  <input type="text" name="prd">
+                  <input type="submit" name="buscar" value= "Buscar">
+              </form>
+            </center>
+            </div>
+            <div>
+                <center><h1>Menu</h1>
+                    <button style="font-size: 1em; width: 14ch; height: 6ch;">
+                    <a href="{% url 'MenuCrear' %}">agregar platillo</a></center>
+                    </button></center>
+                <br>
+                <center><hr width="45%" color="black"  /></center>
+                <br>
+                <ul style="line-height: 0;"> 
+                {% for producto in object_list %}
+
+                <div><p style="line-height: 1">
+                        <center><a href= "{% url 'MenuDetallar' producto.id %}"><spam style="font-weight: bold;"> {{producto.nombre}}</spam></a>  -  <spam style ="color: green; font-weight: bold; font-size: large;">${{producto.precio}}</spam> 
+                        </p>
+                    
+                        <button style="font-size: 0.7em; width: 12ch; height: 3ch;" >
+                            <a href="{% url 'MenuEditar' producto.id %}">Editar</a>
+                        </button>
+                        <button style="font-size: 0.7em; width: 12ch; height: 3ch;" >
+                            <a href="{% url 'MenuEliminar' producto.id %}">Eliminar</a>
+                        </button>
+                    </div>
+                
+                {% endfor %}
+            </ul>
+                <center><hr width="45%" color="black"  />
+                <button style="font-size: 1em; width: 14ch; height: 6ch;">
+                <a href="{% url 'MenuCrear' %}">agregar platillo</a></center>
+                </button>
+                <br>
+            </div>
+        </body>
+</html>
+
+
+{% endblock bloqueQueCambia %}

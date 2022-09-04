@@ -16,10 +16,7 @@
         <img src="{% static 'assets/img/6.jpg' %}" width="225" height="275">
         <img src="{% static 'assets/img/7.jpg' %}" width="225" height="275">
         <img src="{% static 'assets/img/8.jpg' %}" width="225" height="275">
-        <img src="{% static 'assets/img/9.jpg' %}" width="225" height="275">
-        <img src="{% static 'assets/img/10.jpg' %}" width="225" height="275">
-        <img src="{% static 'assets/img/11.jpg' %}" width="225" height="275">
-        <img src="{% static 'assets/img/12.jpg' %}" width="225" height="275">
+
     </center>
   </div>
 
@@ -29,11 +26,18 @@
 
   <body style ="margin-left: 1em; margin-right: 1em">
     {% if productos %}
+    br
+    <center><h1>Producto encontrado: </h1>
+      <hr style="width: 33%;">
+      <br>
         <ul>
             {% for producto in productos %}
-                    <p><h4>Producto encontrado: {{producto.nombre}}</h4><b style="color: green;">Precio: ${{producto.precio}}</b></p>  <p>Volver a <A HREF="{% url 'LeerMenu' %}"> MENU</A></p>
+              
+              <p> <h4><b><a href="{% url 'MenuDetallar' producto.id %}">{{producto.nombre}}</a></h4> <h5>Precio: <span style="color: green;">${{producto.precio}}</span></h5>
+                <hr style="width: 33%;"><br>
+              <h4>Volver a <A HREF="{% url 'MenuListar' %}"> MENU</A></h4></b>
             {% endfor %}
-        </ul>
+        </ul></center>
     {% else %}
         
         <p>No hubo coincidencias. Volver a <A HREF="{% url 'Menu' %}"> MENU</A></p>

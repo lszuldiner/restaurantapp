@@ -15,8 +15,10 @@ class ContactoFormulario(forms.Form):
     mensaje = forms.CharField(max_length=200)
 
 class ProductosForm(forms.Form):
-    nombre = forms.CharField(max_length=150)
+    nombre = forms.CharField(max_length=60)
+    descripcion = forms.CharField(max_length=150)
     precio = forms.IntegerField()
+    tipo = forms.CharField(max_length=30)
 
 class FranquiciaForm(forms.Form):
     nombre = forms.CharField(max_length=50)

@@ -128,75 +128,39 @@ def leermenu(request):
 
                                             #AGREGAR MENU#
 
-def Agregarmenu(request):
-    print('method:', request.method)
-    print('post:', request.POST)
 
-    if request.method == 'POST':
+class MenuListView(ListView):
+    model = Productos
+    template_name = "menu-listar.html"
 
-        productos = ProductosForm(request.POST)
+class menuCreateView(CreateView):
+    model = Productos
+    template_name = "menu-crear.html"
+    fields= ('__all__')
+    success_url= '/App_Resto/menu-listar'
 
-        if productos.is_valid():
+class menuUpdateView(UpdateView):
+    model = Productos
+    template_name = "menu-editar.html"
+    fields= ('__all__')
+    success_url= '/App_Resto/'
 
-            data = productos.cleaned_data
 
-            producto = Productos(nombre=data['nombre'], precio=data['precio'])
+class menuDetailView(DetailView):
+    model = Productos
+    template_name = "menu-detallar.html"
 
-            producto.save()
 
-            return render(request, 'inicio.html')
-    else:
 
-        productos = ProductosForm()
-        contexto= {"productos":productos}
+class menuDeleteView(DeleteView):
+    model = Productos
+    template_name = "menu-eliminar.html"
+    success_url= '/App_Resto/menu-listar'
 
-    return render(request, "agregarMenu.html", contexto)
 
-                                            #ELIMINAR MENU#
 
-def Eliminarmenu(request, id):
-    print('method:', request.method)
-    print('post:', request.POST)
 
-    if request.method == 'POST':
 
-        producto = Productos.objects.get(id=id)
-
-        producto.delete()
-
-        menu = Productos.objects.all()
-
-        contexto = {"menu":menu}
-
-        return render(request, "leermenu.html",contexto)
-
-def Editarmenu(request, id):
-    print('method:', request.method)
-    print('post:', request.POST)
-    producto = Productos.objects.get(id=id)
-
-    if request.method == 'POST':
-
-        menu = ProductosForm(request.POST)
-
-        if menu.is_valid():
-
-            data = menu.cleaned_data
-
-            producto.nombre = data ["nombre"]
-            producto.precio = data ["precio"]
-
-            producto.save()
-
-            return render(request, 'inicio.html')
-    else:
-
-        menu = ProductosForm(initial={
-            "nombre": producto.nombre,
-            "precio": producto.precio,
-        })
-        contexto = {"menu":menu, "id":producto.id}
-    return render(request, "editarmenu.html", contexto)
 
 
 @login_required
@@ -260,9 +224,6 @@ def editarPerfil(request):
         miFormulario = UserEditForm(instance=request.user)
 
     return render(request, "editarPerfil.html", {"miFormulario": miFormulario})
-
-
-
 
 
 

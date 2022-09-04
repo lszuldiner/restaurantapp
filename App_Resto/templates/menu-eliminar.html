@@ -1,0 +1,30 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+
+<head>
+    <style>
+                    form {
+  width: 250px;
+  padding:0ch;
+}
+    </style>
+</head>
+<body><center>
+    <br><br>
+    <h1>¿ Estás apunto de eliminar {{object.nombre}} ?</h1>
+    
+    <form method="POST">{% csrf_token %}
+<br>
+        <input type="submit" value="Confirmar">
+    </form>
+    <br>
+    <hr style="width: 33%;">
+    <br>
+    <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'MenuListar' %}">Volver al menú</a></button>
+    <br><br>
+</center>
+{% endblock bloqueQueCambia %}
