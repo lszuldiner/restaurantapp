@@ -3,7 +3,11 @@ from django.urls import path
 
 from App_Resto.models import Pedidos, Productos
 
-from .views import MenuListView, ReservaDelete, ReservaDetail, ReservaUpdate, agregar_avatar, buscar, busquedaProducto, consultas, contacto, editarPerfil, franquicias, inicio, leermenu, menu, menuCreateView, menuDeleteView, menuDetailView, menuUpdateView, nosotros, loginView, register, reservasClientes, reservasDueno
+from .views import (menuListView, ReservaDelete, ReservaDetail, ReservaUpdate, agregar_avatar, 
+buscar, busquedaProducto, contacto, editarPerfil, franquicias, inicio, menu, menuCreateView, 
+menuDeleteView, menuDetailView, menuUpdateView, nosotros, loginView, register, reservasClientes, reservasDueno, 
+consultaListView , consultaCreateView,consultaUpdateView,consultaDetailView,consultaDeleteView, menuUserListView
+)
 
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
@@ -11,11 +15,17 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', inicio, name="Inicio"),
-    path('menu-listar/', MenuListView.as_view(), name="MenuListar"),
+    path('menu-listar/', menuListView.as_view(), name="MenuListar"),
+    path('menu-usuario/', menuUserListView.as_view(), name="MenuUsuario"),
     path('menu-crear/', menuCreateView.as_view(), name="MenuCrear"),
     path('menu-editar/<int:pk>', menuUpdateView.as_view(), name="MenuEditar"),
     path('menu-detallar/<int:pk>', menuDetailView.as_view(), name="MenuDetallar"),
     path('menu-eliminar/<int:pk>', menuDeleteView.as_view(), name="MenuEliminar"),
+    path('consulta-listar/', consultaListView.as_view(), name="ConsultaListar"),
+    path('consulta-crear/', consultaCreateView.as_view(), name="ConsultaCrear"),
+    path('consulta-editar/<int:pk>', consultaUpdateView.as_view(), name="ConsultaEditar"),
+    path('consulta-detallar/<int:pk>', consultaDetailView.as_view(), name="ConsultaDetallar"),
+    path('consulta-eliminar/<int:pk>', consultaDeleteView.as_view(), name="ConsultaEliminar"),
     path('nosotros/', nosotros, name="Nosotros"),
     path('busquedaProducto/', busquedaProducto, name="BusquedaProducto"),
     path('consultas/', contacto, name="Consultas"),

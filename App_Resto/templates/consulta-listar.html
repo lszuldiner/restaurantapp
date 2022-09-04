@@ -1,0 +1,53 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+
+<html>
+        <head>
+            <style>
+
+                        form {
+              width: 500px;
+              padding:0.15ch;
+            }
+
+            a{
+            color: black;
+            }
+            button {
+            height: 50px;
+            background: orange;
+            border: none;
+            color: black;
+            font-size: 1em;
+            font-family: 'Nanum Gothic';
+            border-radius: 4px;
+            cursor: pointer;
+            }
+            </style>
+        </head>
+        <body>
+        
+            <div>
+            <center><h1>Consultas</h1></center>
+                <br>
+                <center><hr width="45%" color="black"  /></center>
+                <br>
+
+                <ul style="line-height: 0;"> 
+                {% for consulta in object_list %}
+
+            <div><p style="line-height: 1">
+                <center><a href= "{% url 'ConsultaDetallar' consulta.id %}"><spam style="font-weight: bold;">N°0000{{consulta.id}} - {{consulta.nombre}} - {{consulta.asunto}}</spam></a>
+                </p>
+                <button style="font-size: 80%; width: 10%; height: 3ch;" >
+                    <a href="{% url 'ConsultaEliminar' consulta.id %}">Eliminar</a>
+                </button>
+            </div>
+                {% endfor %}
+                </ul>
+        </body>
+{% endblock bloqueQueCambia %}

@@ -1,0 +1,76 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+<head>
+    <style>
+        
+            button {
+            height: 50px;
+            background: orange;
+            border: none;
+            color: black;
+            font-size: 1em;
+            font-family: 'Nanum Gothic';
+            border-radius: 4px;
+            cursor: pointer;
+            }
+            form {
+            width: 500px;
+            margin: 0 auto;
+            padding: 50px;
+            }
+    </style>
+</head>
+<body style="font-family: garamond ;">
+    <br>
+<center><h1>CONSULTAS</h1>
+<hr style="width: 45%;">
+<center> <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'ConsultaListar' %}">Vista de Admin</a></button></center>
+<br>
+<h3>Dejanos tu consulta y nosotros la responderemos en breve ;) </h3>
+</center>
+    <form action="{% url 'ConsultaCrear' %}" method="POST"> {% csrf_token %}
+
+        {{form.as_p}}
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+   <center> <hr style="width: 33%;">
+    
+    <h4>
+        PREGUNTAS FRECUENTES
+    </h4>
+    <h7><b>
+        ¿Cual es nuestro horario?
+    </b></h7>
+    <br>
+    <h8>
+        Lunes a Viernes desde las 20hs
+    </h8>
+    <br>
+    <h7><b>
+        ¿Se puede reservar?
+    </b></h7>
+    <br>
+    <h8>
+        Si! Máximo para 6 personas y se hace a traves de este mismo sitio, apretando <A HREF="{% url 'ReservasClientes' %}"> aquí </A>.
+    </h8>
+    <br>
+    <h7><b>
+        ¿Tienen Instagram?
+    </b></h7>
+    <br>
+    <h8>
+        Si,  <A HREF="https://www.instagram.com/anafe.ba/"> @anafe.ba </A>
+    </h8>
+    <hr style="width: 33%;">
+<br>
+    <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'ConsultaListar' %}">Volver al menú</a></button>
+</center>
+<br>
+    
+</body>
+{% endblock bloqueQueCambia %}

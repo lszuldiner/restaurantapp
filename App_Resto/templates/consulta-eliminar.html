@@ -1,0 +1,46 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+<head>
+    <style>
+        
+            button {
+            height: 50px;
+            background: orange;
+            border: none;
+            color: black;
+            font-size: 1em;
+            font-family: 'Nanum Gothic';
+            border-radius: 4px;
+            cursor: pointer;
+            }
+            form {
+            width: 500px;
+            margin: 0 auto;
+            padding: 50px;
+            }
+    </style>
+</head>
+<body style="font-family: garamond ;">
+    
+<center><h1>CONSULTAS</h1>
+<hr style="width: 45%;">
+Dejanos tu consulta y nosotros la responderemos en breve ;)
+</center>
+    <form action="{% url 'ConsultaCrear' %}" method="POST"> {% csrf_token %}
+
+        {{form.as_p}}
+        
+        <input type="submit" value="Enviar">
+    </form>
+   <center> <hr>
+<br>
+    <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'ConsultaListar' %}">Volver al menú</a></button>
+</center>
+<br>
+
+</body>
+{% endblock bloqueQueCambia %}

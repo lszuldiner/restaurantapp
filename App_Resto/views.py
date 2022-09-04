@@ -30,6 +30,7 @@ def menu(self):
 def consultas(self):
     return render(self, "consultas.html")
 
+
 def contacto(request):
 
     print('method:', request.method)
@@ -120,16 +121,13 @@ def loginView(request):
 
     else:
         return render(request, 'login.html')
-                                            #LEER MENU#
-def leermenu(request):
-    menu = Productos.objects.all()
-    contexto= {"menu":menu}
-    return render(request, 'leermenu.html', contexto)
+                                            
+#########################MENU#####################
+class menuUserListView(ListView):
+    model = Productos
+    template_name = "menu-usuario.html"
 
-                                            #AGREGAR MENU#
-
-
-class MenuListView(ListView):
+class menuListView(ListView):
     model = Productos
     template_name = "menu-listar.html"
 
@@ -143,25 +141,45 @@ class menuUpdateView(UpdateView):
     model = Productos
     template_name = "menu-editar.html"
     fields= ('__all__')
-    success_url= '/App_Resto/'
-
+    success_url= '/App_Resto/menu-listar'
 
 class menuDetailView(DetailView):
     model = Productos
     template_name = "menu-detallar.html"
-
-
 
 class menuDeleteView(DeleteView):
     model = Productos
     template_name = "menu-eliminar.html"
     success_url= '/App_Resto/menu-listar'
 
+##########################CONSULTAS#######################
 
+class consultaListView(ListView):
+    model = Consulta
+    template_name = "consulta-listar.html"
 
+class consultaCreateView(CreateView):
+    model = Consulta
+    template_name = "consulta-crear.html"
+    fields= ('__all__')
+    success_url= '/App_Resto/consulta-listar'
 
+class consultaUpdateView(UpdateView):
+    model = Consulta
+    template_name = "consulta-editar.html"
+    fields= ('__all__')
+    success_url= '/App_Resto/consulta-listar'
 
+class consultaDetailView(DetailView):
+    model = Consulta
+    template_name = "consulta-detallar.html"
 
+class consultaDeleteView(DeleteView):
+    model = Consulta
+    template_name = "menu-eliminar.html"
+    success_url= '/App_Resto/consulta-listar'
+
+############################################################
 
 @login_required
 def reservasDueno(request):

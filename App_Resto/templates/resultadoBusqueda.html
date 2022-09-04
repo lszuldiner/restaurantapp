@@ -35,12 +35,12 @@
               
               <p> <h4><b><a href="{% url 'MenuDetallar' producto.id %}">{{producto.nombre}}</a></h4> <h5>Precio: <span style="color: green;">${{producto.precio}}</span></h5>
                 <hr style="width: 33%;"><br>
-              <h4>Volver a <A HREF="{% url 'MenuListar' %}"> MENU</A></h4></b>
+              <h4>Volver a <A HREF="{% url 'MenuUsuario' %}"> MENU</A></h4></b>
             {% endfor %}
         </ul></center>
     {% else %}
         
-        <p>No hubo coincidencias. Volver a <A HREF="{% url 'Menu' %}"> MENU</A></p>
+        <p>No hubo coincidencias. Volver a <A HREF="{% url 'MenuUsuario' %}"> MENU</A></p>
     {% endif %}
     </body>
 
