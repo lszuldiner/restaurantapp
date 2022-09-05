@@ -1,4 +1,3 @@
-from multiprocessing import context
 from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -15,6 +14,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse_lazy
+#
+
 
 # Create your views here.
 def inicio(self):
@@ -26,32 +27,6 @@ def menu(self):
 
 def consultas(self):
     return render(self, "consultas.html")
-
-
-def contacto(request):
-
-    print('method:', request.method)
-    print('post:', request.POST)
-
-    if request.method == 'POST':
-
-        miFormulario = ContactoFormulario(request.POST)
-
-        if miFormulario.is_valid():
-
-            data = miFormulario.cleaned_data
-
-            consultas = Consulta(nombre=data['nombre'], asunto=data['asunto'], email=data['email'], mensaje=data['mensaje'])
-
-            consultas.save()
-
-            return render(request, 'gracias.html')
-
-    else:
-
-        miFormulario = ContactoFormulario()
-
-    return render(request, "consultas.html", {"miFormulario": miFormulario})
 
 
 def nosotros(self):
@@ -124,22 +99,82 @@ def register(request):
 
     return render(request, "registro.html", {"miFormulario": form})
 
-#########################MENU#####################
+######################################EDITARUSUARIO#############################################
+@login_required
+def editarPerfil(request):
+    
+    print('method:', request.method)
+    print('post:', request.POST)
+
+    usuario = request.user
+
+    if request.method == 'POST':
+
+        form = UserEditForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+
+            data = form.cleaned_data
+
+            usuario.first_name = data["first_name"]
+            usuario.last_name = data["last_name"]
+            usuario.email = data["email"]
+            usuario.password = data["password1"]
+
+            usuario.save()
+
+            return render(request, "inicio.html", {"mensaje": "Datos actualizados con éxito..."})
+
+    else:
+
+        form = UserEditForm(instance=request.user)
+
+    return render(request, "editarPerfil.html", {"form": form})
+
+###################################################EDITARAVATAR###############################
+
+def agregar_avatar(request):
+
+    print('method:', request.method)
+    print('post:', request.POST)
+
+    if request.method == 'POST':
+
+        miFormulario = AvatarFormulario(request.POST, request.FILES)
+
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            avatar = Avatar(user=request.user, imagen=data['imagen'])
+
+            avatar.save()
+
+            return render(request, 'inicio.html', {"mensaje": "Avatar cargado"})
+
+    else:
+
+        miFormulario = AvatarFormulario()
+
+    return render(request, "agregarAvatar.html", {"miFormulario": miFormulario})
+
+
+######################################MENU#############################################
 class menuUserListView(ListView):
     model = Productos
     template_name = "menu-usuario.html"
 
-class menuListView(ListView):
+class menuListView(LoginRequiredMixin, ListView):
     model = Productos
     template_name = "menu-listar.html"
 
-class menuCreateView(CreateView):
+class menuCreateView(LoginRequiredMixin, CreateView):
     model = Productos
     template_name = "menu-crear.html"
     fields= ('__all__')
     success_url= '/App_Resto/menu-listar'
 
-class menuUpdateView(UpdateView):
+class menuUpdateView(LoginRequiredMixin, UpdateView):
     model = Productos
     template_name = "menu-editar.html"
     fields= ('__all__')
@@ -149,34 +184,34 @@ class menuDetailView(DetailView):
     model = Productos
     template_name = "menu-detallar.html"
 
-class menuDeleteView(DeleteView):
+class menuDeleteView(LoginRequiredMixin, DeleteView):
     model = Productos
     template_name = "menu-eliminar.html"
     success_url= '/App_Resto/menu-listar'
 
-##########################CONSULTAS#######################
+###############################################CONSULTAS#######################################
 
-class consultaListView(ListView):
+class consultaListView(LoginRequiredMixin, ListView):
     model = Consulta
     template_name = "consulta-listar.html"
 
-class consultaCreateView(CreateView):
+class consultaCreateView(LoginRequiredMixin, CreateView):
     model = Consulta
     template_name = "consulta-crear.html"
     fields= ('__all__')
     success_url= '/App_Resto/'
 
-class consultaUpdateView(UpdateView):
+class consultaUpdateView(LoginRequiredMixin, UpdateView):
     model = Consulta
     template_name = "consulta-editar.html"
     fields= ('__all__')
     success_url= '/App_Resto/consulta-listar'
 
-class consultaDetailView(DetailView):
+class consultaDetailView(LoginRequiredMixin, DetailView):
     model = Consulta
     template_name = "consulta-detallar.html"
 
-class consultaDeleteView(DeleteView):
+class consultaDeleteView(LoginRequiredMixin, DeleteView):
     model = Consulta
     template_name = "consulta-eliminar.html"
     success_url= '/App_Resto/consulta-listar'
@@ -184,32 +219,33 @@ class consultaDeleteView(DeleteView):
 ################################FRANQUICIAS#########################
 
 
-class franquiciaListView(ListView):
+class franquiciaListView(LoginRequiredMixin, ListView):
     model = Franquicia
     template_name = "franquicia-listar.html"
 
-class franquiciaCreateView(CreateView):
+class franquiciaCreateView(LoginRequiredMixin, CreateView):
     model = Franquicia
     template_name = "franquicia-crear.html"
     fields= ('__all__')
     success_url= '/App_Resto/'
     extra_context = {"mensaje" : "Solicitud de franquicia enviada exitosamente."}
 
-class franquiciaUpdateView(UpdateView):
+class franquiciaUpdateView(LoginRequiredMixin, UpdateView):
     model = Franquicia
     template_name = "franquicia-editar.html"
     fields= ('__all__')
     success_url= '/App_Resto/franquicia-listar'
 
-class franquiciaDetailView(DetailView):
+class franquiciaDetailView(LoginRequiredMixin, DetailView):
     model = Franquicia
     template_name = "franquicia-detallar.html"
 
-class franquiciaDeleteView(DeleteView):
+class franquiciaDeleteView(LoginRequiredMixin, DeleteView):
     model = Franquicia
     template_name = "menu-eliminar.html"
     success_url= '/App_Resto/franquicia-listar'
 
+###############################################CONSULTAS#######################################
 
 @login_required
 def reservasDueno(request):
@@ -243,35 +279,7 @@ def reservasClientes(request):
     return render(request, "reservasCliente.html", {"form": form})
 
 
-def editarPerfil(request):
-    
-    print('method:', request.method)
-    print('post:', request.POST)
 
-    usuario = request.user
-
-    if request.method == 'POST':
-
-        miFormulario = UserEditForm(request.POST, instance=request.user)
-
-        if miFormulario.is_valid():
-
-            data = miFormulario.cleaned_data
-
-            usuario.first_name = data["first_name"]
-            usuario.last_name = data["last_name"]
-            usuario.email = data["email"]
-            usuario.password = data["password1"]
-
-            usuario.save()
-
-            return render(request, "inicio.html", {"mensaje": "Datos actualizados con éxito..."})
-
-    else:
-
-        miFormulario = UserEditForm(instance=request.user)
-
-    return render(request, "editarPerfil.html", {"miFormulario": miFormulario})
 
 
 
@@ -298,30 +306,7 @@ class ReservaDetail(DetailView):
 
 
 
-def agregar_avatar(request):
 
-    print('method:', request.method)
-    print('post:', request.POST)
-
-    if request.method == 'POST':
-
-        miFormulario = AvatarFormulario(request.POST, request.FILES)
-
-        if miFormulario.is_valid():
-
-            data = miFormulario.cleaned_data
-
-            avatar = Avatar(user=request.user, imagen=data['imagen'])
-
-            avatar.save()
-
-            return render(request, 'inicio.html', {"mensaje": "Avatar cargado"})
-
-    else:
-
-        miFormulario = AvatarFormulario()
-
-    return render(request, "agregarAvatar.html", {"miFormulario": miFormulario})
 
 
 

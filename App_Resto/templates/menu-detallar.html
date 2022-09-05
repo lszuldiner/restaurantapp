@@ -11,8 +11,10 @@
 <body>
   
 <br><br>
+{% if request.user.is_staff %}
   <center>
     <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'MenuListar' %}">Vista de Admin</a></button></center>
+    {% endif %}
     <br><br>
     <h1>Detalles del platillo</h1><br>
 <hr width="45%"><br>

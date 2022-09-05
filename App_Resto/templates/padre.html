@@ -56,7 +56,7 @@
               
 
                 {% if user.is_authenticated %}
-                <p style="color:darkorange;padding-top: 0.3125rem; padding-bottom: 0.3125rem; margin-right: 1rem; font-size: 1.25rem; text-decoration: none; white-space: nowrap;">Bienvenid@ {{user.username}}</p>
+                <p style="color:darkorange;padding-top: 0.3125rem; padding-bottom: 0.3125rem; margin-right: 1rem; font-size: 1.25rem; text-decoration: none; white-space: nowrap;">Bienvenid@ <a href="{% url 'EditarPerfil' %}">{{user.username}} </a></p>
                     <a class="btn btn-primary" href="{% url 'Logout' %}">LOGOUT</a>              
                 {% else %}
                     

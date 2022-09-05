@@ -30,9 +30,9 @@ class FranquiciaForm(forms.Form):
 class ReservasForm(forms.Form):
     nombre = forms.CharField(max_length=50)
     email = forms.EmailField()
-    telefono = forms.IntegerField(initial= 1122334455, min_value=10000000,max_value=1600000000)
+    telefono = forms.IntegerField()
     numero_personas= forms.IntegerField(
-        initial=1,min_value=1,max_value=6,help_text="Minimo 1, Máximo 6 personas por mesa")
+        initial=1,min_value=1,max_value=6)
     dia = forms.DateField(help_text="Ingrese Fecha (Dia,Mes,Año)", initial=datetime.today)
     horario = forms.TimeField(help_text="Ingrese hora (Hora:Minutos)")
 

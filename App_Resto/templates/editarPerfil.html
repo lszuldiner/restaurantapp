@@ -4,10 +4,28 @@
 
 
 {% block bloqueQueCambia %}
-
+<head>
+    <style>
+            button {
+            height: 50px;
+            background: orange;
+            border: none;
+            color: black;
+            font-size: 1em;
+            font-family: 'Nanum Gothic';
+            border-radius: 4px;
+            cursor: pointer;
+            }
+            form {
+            width: 500px;
+            margin: 0 auto;
+            padding: 50px;
+            }
+    </style>
+</head>
     <form method="POST">{% csrf_token %}
 
-        {{miFormulario.as_p}}
+        {{form.as_p}}
 
         <input type="submit" value="Guardar">
 

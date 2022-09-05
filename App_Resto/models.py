@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 import django.utils.timezone
 
 
-
-
 # Create your models here.
 
 class Productos(models.Model):

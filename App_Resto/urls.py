@@ -4,9 +4,9 @@ from django.urls import path
 from App_Resto.models import Pedidos, Productos
 
 from .views import (login_request, menuListView, ReservaDelete, ReservaDetail, ReservaUpdate, agregar_avatar, 
-buscar, busquedaProducto, contacto, editarPerfil, inicio, menuCreateView, 
+buscar, busquedaProducto, editarPerfil, inicio, menuCreateView, 
 menuDeleteView, menuDetailView, menuUpdateView, nosotros, register, reservasClientes, reservasDueno, 
-consultaListView , consultaCreateView,consultaUpdateView,consultaDetailView,consultaDeleteView, menuUserListView, 
+consultaListView , consultaCreateView,consultaDetailView,consultaDeleteView, menuUserListView, 
 franquiciaListView, franquiciaCreateView, franquiciaUpdateView, franquiciaDetailView, franquiciaDeleteView
 )
 
@@ -25,7 +25,6 @@ urlpatterns = [
     path('consulta-listar/', consultaListView.as_view(), name="ConsultaListar"),
     path('consulta-crear/', consultaCreateView.as_view(), name="ConsultaCrear"),
     path('consulta-gracias/', consultaCreateView.as_view(), name="ConsultaGracias"),
-    path('consulta-editar/<int:pk>', consultaUpdateView.as_view(), name="ConsultaEditar"),
     path('consulta-detallar/<int:pk>', consultaDetailView.as_view(), name="ConsultaDetallar"),
     path('consulta-eliminar/<int:pk>', consultaDeleteView.as_view(), name="ConsultaEliminar"),
 
@@ -37,7 +36,6 @@ urlpatterns = [
 
     path('nosotros/', nosotros, name="Nosotros"),
     path('busquedaProducto/', busquedaProducto, name="BusquedaProducto"),
-    path('consultas/', contacto, name="Consultas"),
     path('buscar/', buscar, name="Buscar"),
 
     path('login/', login_request, name="Login"),
