@@ -67,16 +67,35 @@
       .slide-3 {
         background-image: url("{% static 'assets/img/anaferestotres.jpg' %}");
       }
+
+      .texto-encima {
+        position: absolute;
+        z-index: 600;
+        width: 100%;
+        top: 5%;
+        color: black;
+        font-style: oblique;
+
+      }
+
     </style>
   </head>
 
   <body>
+
     <div class="slider-container">
       <div class="menu">
         <label for="slide-dot-1"></label>
         <label for="slide-dot-2"></label>
         <label for="slide-dot-3"></label>
       </div>
+
+      <div class=" texto-encima">
+        <h1 style="color: whitesmoke ;text-shadow: black 1px -1px, black -1px 1px, black 1px 1px, black -1px -1px;">Restaurant ANAFE.</h1>
+        <h3 style="color: black ;text-shadow: whitesmoke 1px -1px, whitesmoke -1px 1px, whitesmoke 1px 1px, whitesmoke -1px -1px;">La comida de cada rincón mundo, reunida en tu barrio.</h3>
+        <h4>{{mensaje}}</h4>
+        </div>black
+
       <input id="slide-dot-1" type="radio" name="slides" checked>
       <div class="slide slide-1"></div>
       <input id="slide-dot-2" type="radio" name="slides">
@@ -84,7 +103,7 @@
       <input id="slide-dot-3" type="radio" name="slides">
       <div class="slide slide-3"></div>
     </div>
-    
+
   </body>
 
 

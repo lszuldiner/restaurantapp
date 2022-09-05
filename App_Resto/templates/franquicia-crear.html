@@ -23,18 +23,20 @@
 </head>
     <body style="font-family: garamond ;">
                         <br>
-                        <center><h3>FRANQUICIAS</h3>
+                        <center><h1 style="color: whitesmoke ;text-shadow: black 1px -1px, black -1px 1px, black 1px 1px, black -1px -1px;">FRANQUICIAS</h3>
+                            {% if request.user.is_staff %}
                     <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'FranquiciaListar' %}">Vista de Admin</a></button>
+                            {% endif %}
                     <hr style="width: 45%;">
                     
                     <br>
                     <h6 style="padding-left: 2%;">LANZAMOS NUESTRO PROGRAMA DE FRANQUICIAS. SI DESEA ABRIR UNA DE ELLAS, INSCRIBASE Y PRONTO LO CONTACTAREMOS </h6></center>
     
-    <div class="container mt-5">
+    <center><div class="container mt-5">
         <div class="row">
             <div class="col">
                 <div class="text-right">                                
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3285.195457149816!2d-58.461115584840236!3d-34.5739205804672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb5347d67f839%3A0x43207495fcc04f65!2sAnafe!5e0!3m2!1sen!2sus!4v1661639553797!5m2!1sen!2sus" width="45%" height="400px" style="border:0;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3285.195457149816!2d-58.461115584840236!3d-34.5739205804672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb5347d67f839%3A0x43207495fcc04f65!2sAnafe!5e0!3m2!1sen!2sus!4v1661639553797!5m2!1sen!2sus" width="50%" height="400px" style="border:0;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ></iframe>
                     <font>
                         <form action="{% url 'FranquiciaCrear' %}" method="POST"> {% csrf_token %}
                             {{form.as_p}}
@@ -46,7 +48,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div></center>
     <center><hr style="width: 45%;">
 <br><br>
     <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'ConsultaListar' %}">Volver al menú</a></button>

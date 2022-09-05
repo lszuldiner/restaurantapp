@@ -55,6 +55,7 @@
             <br>
             <div class="Collage effect-parent">
               <center>
+                
                 <img src="{% static 'assets/img/1.jpg' %}" width="225" height="275" >
                 <img src="{% static 'assets/img/2.jpg' %}" width="225" height="275">
                 <img src="{% static 'assets/img/3.jpg' %}" width="225" height="275">
@@ -64,7 +65,10 @@
                 </center>
             </div>
             <br>
+            <center><h1 style="color: whitesmoke ;text-shadow: black 1px -1px, black -1px 1px, black 1px 1px, black -1px -1px;">MENU</h1>
+              {% if request.user.is_staff %}
             <center> <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'MenuListar' %}">Vista de Admin</a></button></center>
+              {% endif %}
             
             <div>
             <br>  
@@ -78,7 +82,7 @@
             </center>
             </div>
             <div>
-                <center><h1>Menu</h1>
+                
                 
                 <br>
                 <center><hr width="45%" color="black"  /></center>

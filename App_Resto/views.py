@@ -2,15 +2,12 @@ from multiprocessing import context
 from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User, auth
-
+from django.contrib.auth.models import User
 from App_Resto.forms import (
     AvatarFormulario, ContactoFormulario,
      FranquiciaForm, ProductosForm, ReservasForm, UserEditForm
 )
-
 from App_Resto.models import Avatar, Consulta, Franquicia, Productos, Reservas
-
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import authenticate, login, logout
@@ -79,49 +76,54 @@ def buscar(request):
     return render(request, "resultadoBusquedaNada.html")
 
 
-def franquicias(request):
+##########################################LOGIN###################################
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
 
-    print('method:', request.method)
-    print('post:', request.POST)
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            contra = form.cleaned_data.get('password')
 
-    if request.method == 'POST':
+            user = authenticate(username=usuario, password=contra)
 
-        Formulario = FranquiciaForm(request.POST)
+            if user is not None:
+                login(request,user)
 
-        if Formulario.is_valid():
+                return render(request,"inicio.html", {"mensaje": f"Bienvenido {usuario}"})
+            else:
 
-            data = Formulario.cleaned_data
-
-            franquicias = Franquicia(nombre=data['nombre'], apellido=data['apellido'], email=data['email'], telefono=data['telefono'], zona=data['zona'])
-
-            franquicias.save()
-
-            return render(request, 'graciasFranquicia.html')
-
-    else:
-
-        Formulario = FranquiciaForm()
-
-    return render(request, "franquicias.html", {"Formulario": Formulario})
-
-
-def loginView(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user = auth.authenticate(username=username, password=password)
-
-        if user is not None:
-            auth.login(request, user)
-            return redirect('ReservasDueno')
+                return render(request,"inicio.html", {"mensaje": "Error, datos incorrectos"})
         else:
-            messages.info(request, 'Usuario Invalido')
-            return redirect('Login')
+
+                return render(request,"inicio.html", {"mensaje": "Error, Formulario Erroneo"})
+    else:
+
+        form = AuthenticationForm()
+        return render(request,"login.html", {'form':form} )
+
+##########################################REGISTRO###################################
+
+def register(request):
+
+    if request.method == 'POST':
+
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+
+            username = form.cleaned_data["username"]
+
+            form.save()
+
+            return render(request, "inicio.html", {"mensaje": f'Usuario {username} creado exitosamente'})
 
     else:
-        return render(request, 'login.html')
-                                            
+
+        form = UserCreationForm()
+
+    return render(request, "registro.html", {"miFormulario": form})
+
 #########################MENU#####################
 class menuUserListView(ListView):
     model = Productos
@@ -179,7 +181,7 @@ class consultaDeleteView(DeleteView):
     template_name = "consulta-eliminar.html"
     success_url= '/App_Resto/consulta-listar'
 
-###################################FRANQUICIAS#########################
+################################FRANQUICIAS#########################
 
 
 class franquiciaListView(ListView):
@@ -191,6 +193,7 @@ class franquiciaCreateView(CreateView):
     template_name = "franquicia-crear.html"
     fields= ('__all__')
     success_url= '/App_Resto/'
+    extra_context = {"mensaje" : "Solicitud de franquicia enviada exitosamente."}
 
 class franquiciaUpdateView(UpdateView):
     model = Franquicia
@@ -321,25 +324,7 @@ def agregar_avatar(request):
     return render(request, "agregarAvatar.html", {"miFormulario": miFormulario})
 
 
-def register(request):
 
-    if request.method == 'POST':
-
-        form = UserCreationForm(request.POST)
-
-        if form.is_valid():
-
-            username = form.cleaned_data["username"]
-
-            form.save()
-
-            return render(request, "inicio.html", {"mensaje": f'Usuario {username} creado'})
-
-    else:
-
-        form = UserCreationForm()
-
-    return render(request, "registro.html", {"miFormulario": form})
 
 
 

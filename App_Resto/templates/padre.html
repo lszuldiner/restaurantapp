@@ -10,6 +10,16 @@
             width: 100%;
             font-family: garamond;
           } 
+          .footer {
+            left: 0px;
+            bottom: 0px;
+            width: 100%;
+            background-color: rgb(0, 0, 0);
+            color: white;
+            text-align: center;
+            margin-top:auto;
+          }
+
         </style>
 
         {% load static %}
@@ -33,27 +43,24 @@
         <nav class="navbar navbar-dark bg-dark static-top">
             <div class="container">
                 <a href="{% url 'Inicio' %}"><img src="{% static 'assets/img/pann.png' %}" width="50" height="50" ></a>
-                </a>
-                <a class="navbar-brand" href="{% url 'MenuUsuario' %}">MENU
-                </a>
-                <a class="navbar-brand" href="{% url 'ConsultaCrear' %}">CONSULTAS
-                </a>
-                <a class="navbar-brand" href="{% url 'Nosotros' %}">NOSOTROS
-                </a>
-                <a class="navbar-brand" href="{% url 'FranquiciaCrear' %}">FRANQUICIAS
-                </a>
-                </a>
-                <a class="navbar-brand" href="{% url 'ReservasClientes' %}">RESERVAS
-                </a>
-              </a>
-              <a class="navbar-brand" href="{% url 'ReservasDueno' %}">STAFF
-              </a>
 
+                <a class="navbar-brand" href="{% url 'MenuUsuario' %}">MENU</a>
+
+                <a class="navbar-brand" href="{% url 'ConsultaCrear' %}">CONSULTAS</a>
+
+                <a class="navbar-brand" href="{% url 'Nosotros' %}">NOSOTROS</a>
+
+                <a class="navbar-brand" href="{% url 'FranquiciaCrear' %}">FRANQUICIAS</a>
+
+                <a class="navbar-brand" href="{% url 'ReservasClientes' %}">RESERVAS</a>
+              
 
                 {% if user.is_authenticated %}
+                <p style="color:darkorange;padding-top: 0.3125rem; padding-bottom: 0.3125rem; margin-right: 1rem; font-size: 1.25rem; text-decoration: none; white-space: nowrap;">Bienvenid@ {{user.username}}</p>
                     <a class="btn btn-primary" href="{% url 'Logout' %}">LOGOUT</a>              
                 {% else %}
-                    Bienvenid@
+                    
+                    <a class="btn btn-primary" href="{% url 'Login' %}" >LOGIN</a>
                 {% endif %}               
             </div>
 
@@ -65,19 +72,7 @@
             
     {% endblock bloqueQueCambia %}
 
-<style>
-.footer {
-  left: 0px;
-  bottom: 0px;
-  width: 100%;
-  background-color: rgb(0, 0, 0);
-  color: white;
-  text-align: center;
-  margin-top:auto;
-}
-</style>
 
-  <!-- Site footer -->
   <div class="footer">
     <footer>
       <center>

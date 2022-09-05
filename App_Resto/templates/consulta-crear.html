@@ -26,9 +26,11 @@
 </head>
 <body style="font-family: garamond ;">
     <br>
-<center><h1>CONSULTAS</h1>
+<center><h1 style="color: whitesmoke ;text-shadow: black 1px -1px, black -1px 1px, black 1px 1px, black -1px -1px;">CONSULTAS</h1>
 <hr style="width: 45%;">
+{% if request.user.is_staff %}
 <center> <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'ConsultaListar' %}">Vista de Admin</a></button></center>
+{% endif %}
 <br>
 <h3>Dejanos tu consulta y nosotros la responderemos en breve ;) </h3>
 </center>

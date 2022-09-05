@@ -3,9 +3,9 @@ from django.urls import path
 
 from App_Resto.models import Pedidos, Productos
 
-from .views import (menuListView, ReservaDelete, ReservaDetail, ReservaUpdate, agregar_avatar, 
-buscar, busquedaProducto, contacto, editarPerfil, franquicias, inicio, menu, menuCreateView, 
-menuDeleteView, menuDetailView, menuUpdateView, nosotros, loginView, register, reservasClientes, reservasDueno, 
+from .views import (login_request, menuListView, ReservaDelete, ReservaDetail, ReservaUpdate, agregar_avatar, 
+buscar, busquedaProducto, contacto, editarPerfil, inicio, menuCreateView, 
+menuDeleteView, menuDetailView, menuUpdateView, nosotros, register, reservasClientes, reservasDueno, 
 consultaListView , consultaCreateView,consultaUpdateView,consultaDetailView,consultaDeleteView, menuUserListView, 
 franquiciaListView, franquiciaCreateView, franquiciaUpdateView, franquiciaDetailView, franquiciaDeleteView
 )
@@ -28,19 +28,22 @@ urlpatterns = [
     path('consulta-editar/<int:pk>', consultaUpdateView.as_view(), name="ConsultaEditar"),
     path('consulta-detallar/<int:pk>', consultaDetailView.as_view(), name="ConsultaDetallar"),
     path('consulta-eliminar/<int:pk>', consultaDeleteView.as_view(), name="ConsultaEliminar"),
+
     path('franquicia-listar/', franquiciaListView.as_view(), name="FranquiciaListar"),
     path('franquicia-crear/', franquiciaCreateView.as_view(), name="FranquiciaCrear"),
     path('franquicia-editar/<int:pk>', franquiciaUpdateView.as_view(), name="FranquiciaEditar"),
     path('franquicia-detallar/<int:pk>', franquiciaDetailView.as_view(), name="FranquiciaDetallar"),
     path('franquicia-eliminar/<int:pk>', franquiciaDeleteView.as_view(), name="FranquiciaEliminar"),
+
     path('nosotros/', nosotros, name="Nosotros"),
     path('busquedaProducto/', busquedaProducto, name="BusquedaProducto"),
     path('consultas/', contacto, name="Consultas"),
     path('buscar/', buscar, name="Buscar"),
-    path('franquicias/', franquicias, name="Franquicias"),
-    path('login/', loginView, name="Login"),
+
+    path('login/', login_request, name="Login"),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name="Logout"),
     path('registrar/', register, name="Registrar"),
+
     path("reservasClientes/", reservasClientes, name="ReservasClientes"),
     path('editar-perfil/', editarPerfil, name="EditarPerfil"),
     path('agregar-avatar/', agregar_avatar, name="AgregarAvatar"),

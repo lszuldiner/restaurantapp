@@ -126,3 +126,4 @@ LOGIN_URL = '/App_Resto/login/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_URL = "/App-Resto/"
