@@ -27,15 +27,13 @@ def inicio(request):
         return render(request, "inicio.html")
 
 def nosotros(request):
-    avatar= Avatar.objects.get(user=request.user.id)
-    try:
+    try:    
         avatar= Avatar.objects.get(user=request.user.id)
         return render(request, "nosotros.html",{"url":avatar.imagen.url})
     except:
         return render(request, "nosotros.html",)
 
 def about(request):
-    avatar= Avatar.objects.get(user=request.user.id)
     try:
         avatar= Avatar.objects.get(user=request.user.id)
         return render(request, "about.html",{"url":avatar.imagen.url})
@@ -43,7 +41,6 @@ def about(request):
         return render(request, "about.html")
 
 def busquedaProducto(request):
-    avatar= Avatar.objects.get(user=request.user.id)
     try:
         avatar= Avatar.objects.get(user=request.user.id)
         return render(request, "busquedaProducto.html",{"url":avatar.imagen.url})

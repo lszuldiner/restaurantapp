@@ -6,13 +6,20 @@ import django.utils.timezone
 
 # Create your models here.
 
+class Avatar(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='avatares', blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.user} - {self.imagen}'
+
 class Productos(models.Model):
     
     nombre = models.CharField(max_length=150)
     descripcion = models.CharField(max_length=150)
     precio = models.IntegerField()
     tipo = models.CharField(max_length=30)
-    imagen = models.ImageField(upload_to='productos', blank=True, null=True)
+    imagen = models.ImageField(upload_to='productos')
 
     def __str__(self):
         return f'{self.nombre} - ${self.precio}'
@@ -89,10 +96,4 @@ class Reservas(models.Model):
 
 
 
-class Avatar(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to='avatares', blank=True, null=True)
-
-    def __str__(self):
-        return f'{self.user} - {self.imagen}'
     

@@ -28,7 +28,10 @@
 <center><h1>Agregar platillo</h1>
 <hr>
 </center>
-    <form action="{% url 'MenuCrear' %}" method="POST"> {% csrf_token %}
+    <form action="{% url 'MenuCrear' %}"
+            method="POST"
+            enctype="multipart/form-data"> {% csrf_token %}
+            
 
         {{form.as_p}}
         

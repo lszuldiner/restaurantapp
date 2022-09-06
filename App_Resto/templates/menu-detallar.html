@@ -17,20 +17,21 @@
 {% endif %}
 <br>
 <br>
-<h1>Detalles del platillo</h1><br>
+<center>
+<h1 style="color: whitesmoke ;text-shadow: black 1px -1px, black -1px 1px, black 1px 1px, black -1px -1px;">Detalles del platillo</h1><br>
 <hr width="45%"><br>
-<img src="{{url}}" alt="producto" height="35px">
-<hr width="45%"><br>
-  <div style="padding: 10px; font-family: garamond; ">
-    <h2><b>{{object.nombre}}</b></h2>
-    <p><b>{{object.descripcion}}</b></p>
-    <p><b>Precio : <span style="color: green;">${{object.precio}}</span></b></p>
-    <p><b>Tipo de platillo: {{object.tipo}}</b></p><br>
-    <hr width="45%"> 
-    <button style="font-size: 1em; width: 14ch; height: 6ch;">
-      <a style="font-size: 1em" class="navbar-brand" href="{% url 'MenuUsuario' %}">Volver al menú</a>
-    </button>
+<div class="card" style="width: 18rem;">
+  <img src="{{object.imagen.url}}" class="card-img-top" alt="producto">
+  <div class="card-body">
+    <h5 class="card-title">{{object.nombre}}</h5>
+    <p class= "card-text">{{object.tipo}}</p>
+    <p class="card-text">{{object.descripcion}}</p>
+    
+    <a href="{% url 'MenuUsuario' %}" class="btn btn-primary">Volver al menú</a>
   </div>
+</div>
+<br>
+<br>
+
 </center>
-</body>
   {% endblock bloqueQueCambia %}

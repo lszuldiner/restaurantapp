@@ -10,7 +10,7 @@
         <h1 style="color: whitesmoke ;text-shadow: black 1px -1px, black -1px 1px, black 1px 1px, black -1px -1px;">AGREGAR AVATAR</h1>
         <hr style= "width:33%"
         <br>
-        {% if img %}
+        {% if not img %}
     <form
         enctype="multipart/form-data"
         method="POST">{% csrf_token %}
