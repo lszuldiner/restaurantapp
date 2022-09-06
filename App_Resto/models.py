@@ -12,6 +12,7 @@ class Productos(models.Model):
     descripcion = models.CharField(max_length=150)
     precio = models.IntegerField()
     tipo = models.CharField(max_length=30)
+    imagen = models.ImageField(upload_to='productos', blank=True, null=True)
 
     def __str__(self):
         return f'{self.nombre} - ${self.precio}'
@@ -19,18 +20,7 @@ class Productos(models.Model):
         verbose_name = 'Producto'
         verbose_name_plural = 'Productos'
 
-class Pedidos(models.Model):
-    
-    numero = models.IntegerField()
-    fecha = models.DateField()
-    entregado = models.BooleanField()
 
-    def __str__(self) -> str:
-        return f'{self.numero} - {self.fecha} - {self.entregado}'
-
-    class Meta():
-        verbose_name = 'Pedido'
-        verbose_name_plural = 'Pedidos'
 
 class Consulta(models.Model):
 
@@ -98,9 +88,11 @@ class Reservas(models.Model):
         return f'{self.nombre} - {self.numero_personas} - {self.dia} - {self.horario}'
 
 
+
 class Avatar(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to='avatares', blank=True, null=True)
 
     def __str__(self):
         return f'{self.user} - {self.imagen}'
+    

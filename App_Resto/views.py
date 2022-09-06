@@ -1,24 +1,20 @@
-from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from App_Resto.forms import (
-    AvatarFormulario, ContactoFormulario,
-     FranquiciaForm, ProductosForm, ReservasForm, UserEditForm
+    AvatarFormulario, UserEditForm
 )
 from App_Resto.models import Avatar, Consulta, Franquicia, Productos, Reservas
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm,PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import update_session_auth_hash
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.conf import settings
-
-#
 
 
 # Create your views here.
@@ -30,22 +26,32 @@ def inicio(request):
     except:
         return render(request, "inicio.html")
 
+def nosotros(request):
+    avatar= Avatar.objects.get(user=request.user.id)
+    try:
+        avatar= Avatar.objects.get(user=request.user.id)
+        return render(request, "nosotros.html",{"url":avatar.imagen.url})
+    except:
+        return render(request, "nosotros.html",)
 
-def menu(self):
-    return render(self, "menu.html")
-
-def consultas(self):
-    return render(self, "consultas.html")
-
-
-def nosotros(self):
-    return render(self, "nosotros.html")
+def about(request):
+    avatar= Avatar.objects.get(user=request.user.id)
+    try:
+        avatar= Avatar.objects.get(user=request.user.id)
+        return render(request, "about.html",{"url":avatar.imagen.url})
+    except:
+        return render(request, "about.html")
 
 def busquedaProducto(request):
-    return render(request, "busquedaProducto.html")
+    avatar= Avatar.objects.get(user=request.user.id)
+    try:
+        avatar= Avatar.objects.get(user=request.user.id)
+        return render(request, "busquedaProducto.html",{"url":avatar.imagen.url})
+    except:
+        return render(request, "busquedaProducto.html")
 
 def buscar(request):
-
+    
     if request.GET["prd"]:
 
         producto=request.GET["prd"]
@@ -242,8 +248,6 @@ class menuDeleteView(LoginRequiredMixin, DeleteView):
 
 ###############################################CONSULTAS#######################################
 
-
-
 class consultaListView(LoginRequiredMixin, ListView):
     model = Consulta
     template_name = "consulta-listar.html"
@@ -271,7 +275,6 @@ class consultaDeleteView(LoginRequiredMixin, DeleteView):
 
 ################################FRANQUICIAS#########################
 
-
 class franquiciaListView(LoginRequiredMixin, ListView):
     model = Franquicia
     template_name = "franquicia-listar.html"
@@ -298,7 +301,7 @@ class franquiciaDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "menu-eliminar.html"
     success_url= '/App_Resto/franquicia-listar'
 
-###############################################CONSULTAS#######################################
+###############################################Intento de Mail#######################################
 
 # @login_required
 # def reservasDueno(request):
@@ -402,7 +405,7 @@ class franquiciaDeleteView(LoginRequiredMixin, DeleteView):
 #         correo.send()
 #         messages.success(request, "Se envió un correo.")
 #         return redirect('inicio')
-
+#####################################################RESERVAS#############################################
 class reservaListView(LoginRequiredMixin, ListView):
     model = Reservas
     template_name = "reserva-listar.html"

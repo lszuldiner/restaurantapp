@@ -67,7 +67,7 @@
                         </button>
                         <ul class="dropdown-menu">
                           {% if request.user.is_superuser %}
-                          <li><a class="dropdown-item" href="App_Resto/admin/">Menú Super Admin</a></li>
+                          <li><a class="dropdown-item" href="{% url 'admin:index' %}">Menú Super Admin</a></li>
                           {% endif %}   
                           <li><a class="dropdown-item" href="{% url 'EditarPerfil' %}">Editar Perfil</a></li>
                           {% if not url %}
@@ -99,6 +99,8 @@
     <footer>
       <center>
         <H1>SEGUINOS EN </H1><a href="https://www.instagram.com/anafe.ba/"><img src="{% static 'assets/img/ig.png' %}" alt="" width="35" height="35" /></a>
+        <br>
+        <a href="{% url 'About' %}">EquipoDeDesarrollo</a>
       </center>
     </footer>
   </div>

@@ -5,27 +5,32 @@
 
 {% block bloqueQueCambia %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-</head>
 <body>
-  
-<br><br>
+<br>
+<br>
 {% if request.user.is_staff %}
-  <center>
-    <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'MenuListar' %}">Vista de Admin</a></button></center>
-    {% endif %}
-    <br><br>
-    <h1>Detalles del platillo</h1><br>
+<center>
+<button style="font-size: 1em; width: 14ch; height: 6ch;">
+  <a style="font-size: 1em" class="navbar-brand" href="{% url 'MenuListar' %}">Vista de Admin</a>
+</button>
+</center>
+{% endif %}
+<br>
+<br>
+<h1>Detalles del platillo</h1><br>
+<hr width="45%"><br>
+<img src="{{url}}" alt="producto" height="35px">
 <hr width="45%"><br>
   <div style="padding: 10px; font-family: garamond; ">
     <h2><b>{{object.nombre}}</b></h2>
-  <p><b>{{object.descripcion}}</b></p>
-  <p><b>Precio : <span style="color: green;">${{object.precio}}</span></b></p>
-  <p><b>Tipo de platillo: {{object.tipo}}</b></p><br>
-  <hr width="45%"> 
-  <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'MenuUsuario' %}">Volver al menú</a></button>
-</div></center>
+    <p><b>{{object.descripcion}}</b></p>
+    <p><b>Precio : <span style="color: green;">${{object.precio}}</span></b></p>
+    <p><b>Tipo de platillo: {{object.tipo}}</b></p><br>
+    <hr width="45%"> 
+    <button style="font-size: 1em; width: 14ch; height: 6ch;">
+      <a style="font-size: 1em" class="navbar-brand" href="{% url 'MenuUsuario' %}">Volver al menú</a>
+    </button>
+  </div>
+</center>
 </body>
-</html>
   {% endblock bloqueQueCambia %}

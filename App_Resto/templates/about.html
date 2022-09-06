@@ -1,0 +1,92 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+<style>
+  .footer {
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    position: absolute;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    text-align: center;
+    margin-top:auto;
+  }
+</style>
+<br><center>
+<h1 style="color: whitesmoke ;text-shadow: black 1px -1px, black -1px 1px, black 1px 1px, black -1px -1px;">ABOUT</h1>
+</center>
+<body>
+    <section class="NovidadesSection">
+        <br>
+        
+        <center>
+          <h2>Somos un pequeño equipo de trabajo, pero con gran inciativa. esperamos seguir mejorando y desarrollando proyectos con la misma iniciativa.</h2>
+                <h5 class=""; ><font face="garamond">LARA: Soy estudiante de Actuario en economía de la Universidad de Buenos Aires. Mi carrera esta vinculada a las estadísticas <br> y utiliza el lenguaje de programacion visto en este curso como herramienta.
+                                Es por eso que decidí anotarme en Coderhouse.<br><br>
+                                </font></h5>
+        </center>
+    </body>
+    <br>
+    <center>
+        <h5 class="";><font face= "garamond"> KEVIN: Trabajo en el ámbito IT desde hace 8 años, empecé haciendo reparaciones; tuve mi propio local;<br>  luego trabajé como soporte técnico, 
+         y Actualmente soy miembro del área de seguridad informática de la <br> Municipalidad de San Martín. Siempre me interesó la programacion y finalmente pude pegar el paso inicial.
+        </font></h5>
+     </center>
+
+    </section>
+    <br><br>
+    <br>
+    <!-- What We Offer-->
+    <section class="section section-md bg-default">
+        <div class="container">
+          <div class="row row-md row-30">
+            <div class="col-sm-6 col-lg-4">
+              <div class="oh-desktop">
+                <!-- Services Terri-->
+                <article class="services-terri wow slideInUp">
+                  <div class="services-terri-figure">
+                    <center>
+                      <img src="{% static 'assets/img/Lara.jpeg' %}" alt="" width="250" height="298"/>
+                    </center>
+
+                </article>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+              <div class="oh-desktop">
+                <!-- Services Terri-->
+                <article class="services-terri wow slideInDown">
+                  <div class="services-terri-figure"><center><img src="{% static 'assets/img/coderlogo.png' %}" alt="" width="250" height="250"/></center>
+                  </div>
+                  <div class="services-terri-caption"><span class="services-terri-icon linearicons-pizza"></span>
+
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+              <div class="oh-desktop">
+                <!-- Services Terri-->
+                <article class="services-terri wow slideInUp">
+                  <div class="services-terri-figure"><center><img src="{% static 'assets/img/kevin.jpg' %}" alt="" width="300" height="278"/></center>
+                  </div>
+                  <div class="services-terri-caption"><span class="services-terri-icon linearicons-hamburger"></span>
+
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+              <div class="oh-desktop">
+                
+              </section>
+              <br>
+              <br>
+
+      
+
+{% endblock bloqueQueCambia %}

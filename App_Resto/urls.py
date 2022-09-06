@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import path
 
-from App_Resto.models import Pedidos, Productos
+from App_Resto.models import  Productos
 
-from .views import (login_request, menuListView, agregar_avatar,buscar, busquedaProducto, editarPerfil, inicio, menuCreateView,
+from .views import (about, login_request, menuListView, agregar_avatar,buscar, busquedaProducto, editarPerfil, inicio, menuCreateView,
  cambiar_password ,menuDeleteView, menuDetailView, menuUpdateView, nosotros, register, consultaListView , consultaCreateView,
  consultaDetailView,consultaDeleteView, menuUserListView, franquiciaListView, franquiciaCreateView, franquiciaUpdateView,
  franquiciaDetailView, franquiciaDeleteView, reservaListView, reservaCreateView, reservaUpdateView, reservaDetailView, reservaDeleteView
@@ -41,6 +41,7 @@ urlpatterns = [
     path('reserva-eliminar/<int:pk>', reservaDeleteView.as_view(), name="ReservaEliminar"),
 
     path('nosotros/', nosotros, name="Nosotros"),
+    path('about/', about, name="About"),
     path('busquedaProducto/', busquedaProducto, name="BusquedaProducto"),
     path('buscar/', buscar, name="Buscar"),
 

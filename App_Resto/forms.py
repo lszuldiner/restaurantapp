@@ -1,11 +1,12 @@
+from dataclasses import fields
 from datetime import datetime
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
-from .models import Reservas
+from .models import Productos, Reservas
 from django.db.models import IntegerField, Model
 from django.core.validators import MaxValueValidator, MinValueValidator
-
+from django.contrib.auth import get_user_model
 from App_Resto.models import Avatar
 
 class ContactoFormulario(forms.Form):
@@ -14,11 +15,17 @@ class ContactoFormulario(forms.Form):
     email = forms.EmailField()
     mensaje = forms.CharField(max_length=200)
 
-class ProductosForm(forms.Form):
-    nombre = forms.CharField(max_length=60)
-    descripcion = forms.CharField(max_length=150)
-    precio = forms.IntegerField()
-    tipo = forms.CharField(max_length=30)
+# class ProductosForm(forms.Form):
+#     nombre = forms.CharField(max_length=60)
+#     descripcion = forms.CharField(max_length=150)
+#     precio = forms.IntegerField()
+#     tipo = forms.CharField(max_length=30)
+#     imagen = forms.ImageField()
+
+class ProductosForm(forms.ModelForm):
+    class Meta:
+        model=Productos
+        fields = ['nombre', 'descripcion', 'precio', 'tipo', 'imagen']
 
 class FranquiciaForm(forms.Form):
     nombre = forms.CharField(max_length=50)
@@ -35,7 +42,6 @@ class ReservasForm(forms.Form):
     dia = forms.DateField(widget=forms.Select(choices=Reservas.dias_))
     horario = forms.CharField(widget=forms.Select(choices=Reservas.horarios_))
 
-
 class UserEditForm(UserChangeForm):
 
     password = forms.CharField(
@@ -47,13 +53,9 @@ class UserEditForm(UserChangeForm):
         model = User
         fields = ['email', 'first_name', 'last_name']
 
-
-
-
 class AvatarFormulario(forms.ModelForm):
 
     class Meta:
         model=Avatar
-        fields=('imagen',)
-
+        fields=('imagen',) 
 
