@@ -6,6 +6,7 @@
 {% block bloqueQueCambia %}
 <head>
     <style>
+        
             button {
             height: 50px;
             background: orange;
@@ -23,17 +24,23 @@
             }
     </style>
 </head>
-<br><br>
-<div style="margin-left:40%; margin-right:40%;">
-<center><h1 style="color: whitesmoke ;text-shadow: black 1px -1px, black -1px 1px, black 1px 1px, black -1px -1px;"> EDITAR PERFIL</h1>
-<hr style=></center>
-    <form method="POST">{% csrf_token %}
+<body style="font-family: garamond ;">
+    
+<center><h1>CONSULTAS</h1>
+<hr style="width: 45%;">
+Dejanos tu consulta y nosotros la responderemos en breve ;)
+</center>
+    <form action="{% url 'FranquiciaCrear' %}" method="POST"> {% csrf_token %}
 
         {{form.as_p}}
-
-        <input type="submit" value="Guardar">
         
+        <input type="submit" value="Enviar">
     </form>
-</div>
-<a href="{% url 'Inicio' %}">Volver al inicio</a>
+   <center> <hr>
+<br>
+    <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'FranquiciaListar' %}">Volver al menú</a></button>
+</center>
+<br>
+
+</body>
 {% endblock bloqueQueCambia %}

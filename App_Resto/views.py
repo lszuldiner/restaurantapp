@@ -8,18 +8,27 @@ from App_Resto.forms import (
 )
 from App_Resto.models import Avatar, Consulta, Franquicia, Productos, Reservas
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm,PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from django.urls import reverse_lazy
+from django.contrib.auth import update_session_auth_hash
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.conf import settings
+
 #
 
 
 # Create your views here.
-def inicio(self):
-    return render(self, "inicio.html")
+def inicio(request):
+
+    try:
+        avatar= Avatar.objects.get(user=request.user.id)
+        return render(request, "inicio.html",{"url":avatar.imagen.url})
+    except:
+        return render(request, "inicio.html")
 
 
 def menu(self):
@@ -119,7 +128,6 @@ def editarPerfil(request):
             usuario.first_name = data["first_name"]
             usuario.last_name = data["last_name"]
             usuario.email = data["email"]
-            usuario.password = data["password1"]
 
             usuario.save()
 
@@ -131,8 +139,24 @@ def editarPerfil(request):
 
     return render(request, "editarPerfil.html", {"form": form})
 
-###################################################EDITARAVATAR###############################
+#####################################################CAMBIARPASSWORD#####################################
+@login_required
+def cambiar_password(request):
 
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return render(request, "inicio.html", {"mensaje":"Tu Contraseña fue modificada con éxito!"})
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'cambiar_password.html', {'form': form})
+
+###################################################EDITARAVATAR###############################
+@login_required
 def agregar_avatar(request):
 
     print('method:', request.method)
@@ -150,7 +174,7 @@ def agregar_avatar(request):
 
             avatar.save()
 
-            return render(request, 'inicio.html', {"mensaje": "Avatar cargado"})
+            return render(request, 'inicio.html', {"mensaje": "Avatar agregado correctamente."})
 
     else:
 
@@ -158,6 +182,33 @@ def agregar_avatar(request):
 
     return render(request, "agregarAvatar.html", {"miFormulario": miFormulario})
 
+######################################CAMBIARAVATAR#################################
+
+@login_required
+def cambiar_avatar(request):
+
+    print('method:', request.method)
+    print('post:', request.POST)
+
+    if request.method == 'POST':
+
+        miFormulario = AvatarFormulario(request.POST, request.FILES)
+
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            avatar = Avatar(user=request.user, imagen=data['imagen'])
+
+            avatar.save()
+
+            return render(request, 'inicio.html', {"mensaje": "Avatar agregado correctamente."})
+
+    else:
+
+        miFormulario = AvatarFormulario()
+
+    return render(request, "agregarAvatar.html", {"miFormulario": miFormulario})
 
 ######################################MENU#############################################
 class menuUserListView(ListView):
@@ -190,6 +241,8 @@ class menuDeleteView(LoginRequiredMixin, DeleteView):
     success_url= '/App_Resto/menu-listar'
 
 ###############################################CONSULTAS#######################################
+
+
 
 class consultaListView(LoginRequiredMixin, ListView):
     model = Consulta
@@ -247,62 +300,133 @@ class franquiciaDeleteView(LoginRequiredMixin, DeleteView):
 
 ###############################################CONSULTAS#######################################
 
-@login_required
-def reservasDueno(request):
-    db = Reservas.objects.all()
-    return render(request, 'reservasDueno.html', {'db':db})
+# @login_required
+# def reservasDueno(request):
+#     db = Reservas.objects.all()
+#     return render(request, 'reservasDueno.html', {'db':db})
 
 
 
-def reservasClientes(request):
-    print('method:', request.method)
-    print('post:', request.POST)
+# def reservasClientes(request):
+#     print('method:', request.method)
+#     print('post:', request.POST)
 
-    if request.method == 'POST':
+#     if request.method == 'POST':
 
-        form = ReservasForm(request.POST)
+#         form = ReservasForm(request.POST)
 
-        if form.is_valid():
+#         if form.is_valid():
 
-            data = form.cleaned_data
+#             data = form.cleaned_data
 
-            reservas = Reservas(nombre=data['nombre'], email=data['email'], telefono=data['telefono'], numero_personas=data['numero_personas'], dia=data['dia'], horario=data['horario'])
+#             reservas = Reservas(
+#                 nombre=data['nombre'],
+#                 email=data['email'],
+#                 telefono=data['telefono'], 
+#                 numero_personas=data['numero_personas'],
+#                 dia=data['dia'],
+#                 horario=data['horario']
+#                 )
 
-            reservas.save()
+#             reservas.save()
+            
+#             name= request.POST['nombre']
+#             subject= f"Reservación de {request.POST['nombre']}, para el día  {request.POST['dia']}"
+#             email= request.POST['email']
+#             message= f"Reservación de {request.POST['nombre']}, para el día  {request.POST['dia']}, a las {request.POST['horario']} HS"
+#             telefono= request.POST['telefono']
+#             numero_personas= request.POST['numero_personas']
+#             dia= request.POST['dia']
+#             horario= request.POST['horario']
 
-            return render(request, 'graciasReservas.html')
+#             template= render_to_string('email_template.html',{
+#                 'name': name,
+#                 'subject': subject,
+#                 'email': email,
+#                 'message': message,
+#                 'telefono': telefono,
+#                 'numero_personas': numero_personas,
+#                 'dia': dia,
+#                 'horario': horario
+#                 })
+#             correo = EmailMessage(
+#                 subject,
+#                 template,
+#                 settings.EMAIL_HOST_USER,
+#                 ['soykaza@gmail.com']
+#             )
 
-    else:
+#             correo.fail_silently = False
+#             correo.send()
+#             messages.success(request, "Se envió un correo.")
+#             return redirect('inicio')
 
-        form = ReservasForm()
+#     else:
 
-    return render(request, "reservasCliente.html", {"form": form})
+#         form = ReservasForm()
+
+#     return render(request, "reservasCliente.html", {"form": form})
+
+# def EmailEnviar(request):
+#     if request.method == "POST":
+#         name= request.POST['nombre']
+#         subject= f"Reservación de {request.POST['nombre']}, para el día  {request.POST['dia']}"
+#         email= request.POST['email']
+#         message= f"Reservación de {request.POST['nombre']}, para el día  {request.POST['dia']}, a las {request.POST['horario']} HS"
+#         telefono= request.POST['telefono']
+#         numero_personas= request.POST['numero_personas']
+#         dia= request.POST['dia']
+#         horario= request.POST['horario']
 
 
 
 
+#         template= render_to_string('email_template.html',{
+#             'name': name,
+#             'subject': subject,
+#             'email': email,
+#             'message': message,
+#             'telefono': telefono,
+#             'numero_personas': numero_personas,
+#             'dia': dia,
+#             'horario': horario
+#             })
+#         correo = EmailMessage(
+#             subject,
+#             template,
+#             settings.EMAIL_HOST_USER,
+#             ['soykaza@gmail.com']
+#         )
 
+#         correo.fail_silently = False
+#         correo.send()
+#         messages.success(request, "Se envió un correo.")
+#         return redirect('inicio')
 
-
-class ReservaUpdate(UpdateView):
-
+class reservaListView(LoginRequiredMixin, ListView):
     model = Reservas
-    template_name = 'reservasUpdate.html'
-    fields = ('__all__')
-    success_url = '/App_Resto/reservasDueno'
+    template_name = "reserva-listar.html"
 
-class ReservaDelete(DeleteView):
-
+class reservaCreateView(LoginRequiredMixin, CreateView):
     model = Reservas
-    template_name = 'reservasDelete.html'
-    success_url = '/App_Resto/reservasDueno'
+    template_name = "reserva-crear.html"
+    fields= ('__all__')
+    success_url= '/App_Resto/'
 
-class ReservaDetail(DetailView):
-
+class reservaUpdateView(LoginRequiredMixin, UpdateView):
     model = Reservas
-    template_name = 'reservasDetail.html'
-    context_object_name = '/App_Resto/reservasDueno'
+    template_name = "reserva-editar.html"
+    fields= ('__all__')
+    success_url= '/App_Resto/reserva-listar'
 
+class reservaDetailView(LoginRequiredMixin, DetailView):
+    model = Reservas
+    template_name = "reserva-detallar.html"
+
+class reservaDeleteView(LoginRequiredMixin, DeleteView):
+    model = Reservas
+    template_name = "reserva-eliminar.html"
+    success_url= '/App_Resto/reserva-listar'
 
 
 

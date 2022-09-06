@@ -66,22 +66,41 @@ class Franquicia(models.Model):
 
 
 class Reservas(models.Model):
+    horarios_=(
+        ("20:00","8:00PM"),
+        ("21:00","9:00PM"),
+        ("22:00","10:00PM"),
+        ("23:00","11:00PM"),
+        ("24:00","12:00PM"),
+    )
+    dias_=(
+        ("lunes","Lunes"),
+        ("martes","Martes"),
+        ("miercoles","Miercoles"),
+        ("jueves","Jueves"),
+        ("viernes","Viernes"),
+        ("sabado","Sabado"),
+        ("domingo","Domingo")
+    )
+
     nombre = models.CharField(max_length=50)
     email = models.EmailField()
     telefono = models.IntegerField()
     numero_personas= models.IntegerField()
-    dia = models.DateField()
-    horario = models.TimeField()
+    dia = models.CharField(choices=dias_,max_length=9)
+    horario = models.CharField(max_length=7, choices=horarios_)
 
     class Meta:
         verbose_name = "Reserva"
         verbose_name_plural = "Reservas"
 
     def __str__(self):
-        return f'{self.nombre}'
+        return f'{self.nombre} - {self.numero_personas} - {self.dia} - {self.horario}'
 
 
 class Avatar(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to='avatares', blank=True, null=True)
 
+    def __str__(self):
+        return f'{self.user} - {self.imagen}'

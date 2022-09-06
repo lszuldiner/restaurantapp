@@ -6,6 +6,7 @@
 {% block bloqueQueCambia %}
 <head>
     <style>
+        
             button {
             height: 50px;
             background: orange;
@@ -23,17 +24,16 @@
             }
     </style>
 </head>
-<br><br>
-<div style="margin-left:40%; margin-right:40%;">
-<center><h1 style="color: whitesmoke ;text-shadow: black 1px -1px, black -1px 1px, black 1px 1px, black -1px -1px;"> EDITAR PERFIL</h1>
-<hr style=></center>
-    <form method="POST">{% csrf_token %}
-
-        {{form.as_p}}
-
-        <input type="submit" value="Guardar">
-        
-    </form>
-</div>
-<a href="{% url 'Inicio' %}">Volver al inicio</a>
+<body style="font-family: garamond ;">
+    <br>
+<center><h1>GRACIAS POR DEJARNOS TU RESERVA</h1>
+<hr style="width: 45%;">
+<center><h6>Nos pondremos en contacto</h6></center>
+<hr style="width: 33%;">
+<br>
+    <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'Inicio' %}">Volver al inicio</a></button>
+</center>
+<br>
+    
+</body>
 {% endblock bloqueQueCambia %}

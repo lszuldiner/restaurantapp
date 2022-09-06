@@ -30,11 +30,10 @@ class FranquiciaForm(forms.Form):
 class ReservasForm(forms.Form):
     nombre = forms.CharField(max_length=50)
     email = forms.EmailField()
-    telefono = forms.IntegerField()
-    numero_personas= forms.IntegerField(
-        initial=1,min_value=1,max_value=6)
-    dia = forms.DateField(help_text="Ingrese Fecha (Dia,Mes,Año)", initial=datetime.today)
-    horario = forms.TimeField(help_text="Ingrese hora (Hora:Minutos)")
+    telefono = forms.IntegerField(max_value=1599999999)
+    numero_personas= forms.IntegerField(initial=1,min_value=1,max_value=6)
+    dia = forms.DateField(widget=forms.Select(choices=Reservas.dias_))
+    horario = forms.CharField(widget=forms.Select(choices=Reservas.horarios_))
 
 
 class UserEditForm(UserChangeForm):
@@ -44,19 +43,10 @@ class UserEditForm(UserChangeForm):
         widget=forms.HiddenInput(), required=False
     )
 
-    password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Repetir contraseña", widget=forms.PasswordInput)
-
     class Meta:
         model = User
         fields = ['email', 'first_name', 'last_name']
 
-    def clean_password2(self):
-
-        password2 = self.cleaned_data["password2"]
-        if password2 != self.cleaned_data["password1"]:
-            raise forms.ValidationError("Las contraseñas no coinciden..")
-        return password2
 
 
 
@@ -65,3 +55,5 @@ class AvatarFormulario(forms.ModelForm):
     class Meta:
         model=Avatar
         fields=('imagen',)
+
+

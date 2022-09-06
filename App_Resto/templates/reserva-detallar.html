@@ -1,0 +1,31 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+
+{% block bloqueQueCambia %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+<br><br>
+
+  <div style="padding: 10px; font-family: garamond; margin-left: 25%;">
+    <h2>Reserva n°: {{object.id}}</h2><br>
+    <hr width="45%"><br>
+    <ul>
+    <p><b>Cliente: "{{object.nombre}}"</b></p>
+  <p><b>{{object.numero_personas}} comensales, para el día {{object.dia}} a las {{object.horario}} HS</b></p>
+  <h2>contacto</h2>
+  <p><b>Telefono: "{{object.telefono}}"</b></p>
+  <p><b>Email: "{{object.email}}"</b></p>
+</ul>
+  <br>
+  <hr width="45%"> 
+  <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'ReservaListar' %}">Volver al menú</a></button>
+</div>
+</body>
+</html>
+{% endblock bloqueQueCambia %}

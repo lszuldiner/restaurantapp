@@ -3,11 +3,10 @@ from django.urls import path
 
 from App_Resto.models import Pedidos, Productos
 
-from .views import (login_request, menuListView, ReservaDelete, ReservaDetail, ReservaUpdate, agregar_avatar, 
-buscar, busquedaProducto, editarPerfil, inicio, menuCreateView, 
-menuDeleteView, menuDetailView, menuUpdateView, nosotros, register, reservasClientes, reservasDueno, 
-consultaListView , consultaCreateView,consultaDetailView,consultaDeleteView, menuUserListView, 
-franquiciaListView, franquiciaCreateView, franquiciaUpdateView, franquiciaDetailView, franquiciaDeleteView
+from .views import (login_request, menuListView, agregar_avatar,buscar, busquedaProducto, editarPerfil, inicio, menuCreateView,
+ cambiar_password ,menuDeleteView, menuDetailView, menuUpdateView, nosotros, register, consultaListView , consultaCreateView,
+ consultaDetailView,consultaDeleteView, menuUserListView, franquiciaListView, franquiciaCreateView, franquiciaUpdateView,
+ franquiciaDetailView, franquiciaDeleteView, reservaListView, reservaCreateView, reservaUpdateView, reservaDetailView, reservaDeleteView
 )
 
 from django.contrib.auth.views import LogoutView
@@ -15,6 +14,7 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
+    path('admin/', admin.site.urls, name="SuperUserView"),
     path('', inicio, name="Inicio"),
     path('menu-listar/', menuListView.as_view(), name="MenuListar"),
     path('menu-usuario/', menuUserListView.as_view(), name="MenuUsuario"),
@@ -34,6 +34,12 @@ urlpatterns = [
     path('franquicia-detallar/<int:pk>', franquiciaDetailView.as_view(), name="FranquiciaDetallar"),
     path('franquicia-eliminar/<int:pk>', franquiciaDeleteView.as_view(), name="FranquiciaEliminar"),
 
+    path('reserva-listar/', reservaListView.as_view(), name="ReservaListar"),
+    path('reserva-crear/', reservaCreateView.as_view(), name="ReservaCrear"),
+    path('reserva-editar/<int:pk>', reservaUpdateView.as_view(), name="ReservaEditar"),
+    path('reserva-detallar/<int:pk>', reservaDetailView.as_view(), name="ReservaDetallar"),
+    path('reserva-eliminar/<int:pk>', reservaDeleteView.as_view(), name="ReservaEliminar"),
+
     path('nosotros/', nosotros, name="Nosotros"),
     path('busquedaProducto/', busquedaProducto, name="BusquedaProducto"),
     path('buscar/', buscar, name="Buscar"),
@@ -41,12 +47,8 @@ urlpatterns = [
     path('login/', login_request, name="Login"),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name="Logout"),
     path('registrar/', register, name="Registrar"),
-
-    path("reservasClientes/", reservasClientes, name="ReservasClientes"),
     path('editar-perfil/', editarPerfil, name="EditarPerfil"),
     path('agregar-avatar/', agregar_avatar, name="AgregarAvatar"),
-    path("reservasDueno/", reservasDueno, name="ReservasDueno"),
-    path('actualizarReservas/<int:pk>', ReservaUpdate.as_view(), name="ActualizarReserva"),
-    path('eliminarReservas/<int:pk>', ReservaDelete.as_view(), name="EliminarReserva"),
-    path('detallesReservas/<int:pk>', ReservaDetail.as_view(), name="DetailReserva"),
+    path('cambiar-password/', cambiar_password, name="CambiarPassword"),
+
     ]
