@@ -71,7 +71,7 @@
                           {% endif %}   
                           <li><a class="dropdown-item" href="{% url 'EditarPerfil' %}">Editar Perfil</a></li>
                           {% if not url %}
-                          <li><a class="dropdown-item" href="{% url 'AgregarAvatar' %}"></a></li>
+                          <li><a class="dropdown-item" href="{% url 'AgregarAvatar' %}">Agregar avatar</a></li>
                           {% endif %}
                           <li><a class="dropdown-item" href="{% url 'CambiarPassword' %}">Cambiar Password</a></li>
                           <li><a class="dropdown-item" style="color:red;" href="{% url 'Logout' %}">Logout</a></li>

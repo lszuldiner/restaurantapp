@@ -6,41 +6,24 @@
 {% block bloqueQueCambia %}
 <head>
     <style>
-        
-            button {
-            height: 50px;
-            background: orange;
-            border: none;
-            color: black;
-            font-size: 1em;
-            font-family: 'Nanum Gothic';
-            border-radius: 4px;
-            cursor: pointer;
-            }
-            form {
-            width: 500px;
-            margin: 0 auto;
-            padding: 50px;
-            }
+                    form {
+  width: 250px;
+  padding:0ch;
+}
     </style>
 </head>
-<body style="font-family: garamond ;">
+<body><center>
+    <br><br>
+    <h1>¿ Estás seguro de eliminar la solicitud {{object.id}}, enviada por {{object.nombre}} ?</h1>
     
-<center><h1>CONSULTAS</h1>
-<hr style="width: 45%;">
-Dejanos tu consulta y nosotros la responderemos en breve ;)
-</center>
-    <form action="{% url 'FranquiciaCrear' %}" method="POST"> {% csrf_token %}
-
-        {{form.as_p}}
-        
-        <input type="submit" value="Enviar">
+    <form method="POST">{% csrf_token %}
+<br>
+        <input type="submit" value="Confirmar">
     </form>
-   <center> <hr>
-<br>
-    <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'FranquiciaListar' %}">Volver al menú</a></button>
+    <br>
+    <hr style="width: 33%;">
+    <br>
+    <button style="font-size: 1em; width: 14ch; height: 6ch;"><a style="font-size: 1em" class="navbar-brand" href="{% url 'ConsultaGracias' %}">Volver al menú</a></button>
+    <br><br>
 </center>
-<br>
-
-</body>
 {% endblock bloqueQueCambia %}
